@@ -1,0 +1,97 @@
+.event-cta {
+    position: relative;
+    width: 420px;
+    height: 610px;
+    top: 3vh;
+    margin: auto;
+    background: #f6f6f6;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.close {
+    float: right;
+}
+.event-info {
+    width: 100%;
+    height: 93%;
+    padding: 0 10px;
+    overflow: scroll;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+.title {
+    font-size: 2rem;
+    text-align: center;
+    font-family: 'Knewave', cursive;
+}
+.flex-cta {
+    height: 30%;
+    display: flex;
+    align-items: center;
+}
+.date-cta {
+  width: 30%;
+}
+.date {
+  width: 75px;
+  height: 75px;
+  background: rgba(0, 0, 0, 0.7);
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-radius: 20px;
+}
+.day {
+  font-size: 2rem;
+}
+.detail-cta {
+  width: 70%;
+}
+.address {
+  margin: 5px 0;
+}
+.duration {
+  margin: 0 30px;
+}
+.username {
+  margin: 5px 0;
+}
+.description {
+  padding: 0 20px;
+}
+.shift {
+  position: relative;
+  bottom: 40%;
+  height: 100px;
+}
+.left {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: white; 
+  position: absolute;
+  left: -60px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+  font-size: 3rem;
+  padding: 15px;
+  cursor: pointer;
+}
+.right {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: white; 
+  position: absolute;
+  right: -60px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+  font-size: 3rem;
+  padding: 15px;
+  cursor: pointer;
+}
+
+
+
