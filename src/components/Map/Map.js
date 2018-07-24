@@ -6,6 +6,7 @@ import InfoWindow from '../InfoWindow/InfoWindow.js';
 import Event from '../Event.js';
 import sampleMarkers from '../sample-markers.js';
 import axios from "../../base.js";
+import Loading from "../Loading/Loading.js";
 
 const google = window.google;
 
@@ -150,6 +151,7 @@ class Map extends Component {
     }
 
     render() {
+
         return (
             <div>
                 <div className="toggle-cta">
@@ -186,10 +188,9 @@ class Map extends Component {
                         :""
                     }
                 </div>
-                  
-            
+
                     <div ref="map" className="map">
-                        Loading...
+                        <Loading />
                         {this.state.markers !== null?
                             Object.keys(this.state.markers).map(key => (
                                 <Marker 

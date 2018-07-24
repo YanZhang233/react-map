@@ -1,0 +1,75 @@
+.loading {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #1E56A0;
+}
+
+.jelly {
+    margin: 0;
+    width: 100vw;
+    height: 60vh;
+    background: #D6E4F0;
+    position: relative;
+    overflow: hidden;
+}
+
+.head {
+    width: 40vmin;
+    height: 40vmin;
+    background: #163172;
+    position: absolute;
+    border-radius: 40% 43%;
+    left: -7vmin;
+    top: calc(60vh - 20vmin);
+    animation:
+            swim 5s linear infinite alternate,
+            roll 3s linear infinite;
+}
+
+.eyes {
+    width: 20vmin;
+    height: 7vmin;
+    position: absolute;
+    bottom: 5vmin;
+    left: 12vmin;
+    animation: swim 5s linear infinite alternate;
+}
+
+.eyes::before,
+.eyes::after {
+    content: ' ';
+    width: 7vmin;
+    height: 7vmin;
+    border: 1.5vmin solid white;
+    border-radius: 50%;
+    box-sizing: border-box;
+    position: absolute;
+    animation: blink 5s linear infinite alternate;
+}
+
+.eyes::after {
+    right: 0;
+}
+
+@keyframes roll {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes swim {
+    to {
+        /*transform: translateX(calc(100vw - 40vmin));*/
+        left: calc(100vw - 40vmin + 7vmin);
+    }
+}
+
+@keyframes blink {
+    0%, 4%, 10%, 34%, 40%, 100% {
+        transform: scaleY(1);
+    }
+    7%, 37% {
+        transform: scaleY(0);
+    }
+}
