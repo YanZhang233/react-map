@@ -167,18 +167,6 @@ class Map extends Component {
                           <li className="nav-item">
                             <a className="nav-link" href="#">MyAccount</a>
                           </li>
-                          <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Category
-                            </a>
-                            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a className="dropdown-item" onClick={() => {this.searchCategory(0)}}>Sport</a>
-                              <a className="dropdown-item" onClick={() => {this.searchCategory(1)}}>Game</a>
-                              <a className="dropdown-item" onClick={() => {this.searchCategory(2)}}>Hobby</a>
-                              <a className="dropdown-item" onClick={() => {this.searchCategory(3)}}>Outdoor</a>
-                              <a className="dropdown-item" onClick={() => {this.searchCategory(4)}}>Help</a>
-                            </div>
-                          </li>
                         </ul>
                         <form className="form-inline my-2 my-lg-0">
                           <input className="form-control mr-sm-2" ref={this.searchRef} type="search" placeholder="Search" aria-label="Search"/>
