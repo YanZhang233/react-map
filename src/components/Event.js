@@ -8,7 +8,7 @@ class Event extends Component {
             map={this.props.map}
             changeCenter={this.props.changeCenter}
             toggleEvent={this.props.toggleEvent}
-            markers={this.props.markers}
+            defaultEventPlace={this.props.defaultEventPlace}
         />
     );
   }

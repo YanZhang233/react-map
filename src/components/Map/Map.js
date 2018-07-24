@@ -20,7 +20,14 @@ class Map extends Component {
             },
             map: null,
             displayEvent: false,
-            markers: []
+            markers: [],
+            defaultEventPlace: {
+                defaultPlace: null,
+                defaultGeoLocation: {
+                    lat: null,
+                    lng: null
+                }
+            }
         };
 
         this.searchRef = React.createRef();
@@ -62,8 +69,12 @@ class Map extends Component {
                 }
                 if(Math.abs(center.lat - this.state.currentCenter.lat) > 0.04 || Math.abs(center.lng - this.state.currentCenter.lng) > 0.04) {
                     this.setState({ currentCenter: center }, this.getMarkers(center));
+                    this.setDefaultEventPlace(center);
                 }
             });
+
+            this.setDefaultEventPlace(this.state.currentCenter);
+
     }
 
     toggleEvent = (event) => {
@@ -94,16 +105,6 @@ class Map extends Component {
         this.setState({ markers: null });
     }
 
-    searchCategory = (categoryId) => {
-        axios.get(`/event/category/${categoryId}`
-        )
-        .then(res => {
-            console.log(res.data);
-            
-        })
-
-    }
-
     searchPlace = () => {
         const searchInput = ReactDOM.findDOMNode(this.searchRef.current);
         if(google) {
@@ -122,6 +123,30 @@ class Map extends Component {
         };
         
         this.changeCenter(center);
+        this.setDefaultEventPlace(center);
+    }
+
+    setDefaultEventPlace = (geolocation) => {
+
+        let place;
+
+        const geocoder = new google.maps.Geocoder();
+
+        geocoder.geocode({ 'location': geolocation}, (results, status) => {
+            if(status === google.maps.GeocoderStatus.OK) {
+                place = results[0].formatted_address;
+                const newDefaultEventPlace = {
+                    defaultPlace: place,
+                    defaultGeoLocation: {
+                        lat: geolocation.lat,
+                        lng: geolocation.lng
+                    }
+                }
+
+                this.setState({defaultEventPlace: newDefaultEventPlace});
+            }
+        });
+
     }
 
     render() {
@@ -168,6 +193,7 @@ class Map extends Component {
                             changeCenter={this.changeCenter}
                             toggleEvent={this.toggleEvent}
                             markers={this.state.markers}
+                            defaultEventPlace={this.state.defaultEventPlace}
                         />
                         :""
                     }

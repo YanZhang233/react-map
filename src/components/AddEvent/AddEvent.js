@@ -12,11 +12,7 @@ class AddEvent extends Component {
         super(props);
 
         this.state = {
-            geoLocation: {
-                lat: null,
-                lng: null
-            },
-            markers: this.props.markers,
+            geoLocation: this.props.defaultEventPlace.defaultGeoLocation,
             newMarker: null
         };
 
@@ -26,19 +22,26 @@ class AddEvent extends Component {
         this.timeRef = React.createRef();
         this.durationRef = React.createRef();
         this.descriptionRef = React.createRef();
-        this.contactRef = React.createRef();
     }
 
     componentDidMount() {
-        console.log(this.state.markers);
+        this.initDateTime();
         this.initPlaceMap();
+    }
+
+    initDateTime = () => {
+
     }
 
     initPlaceMap = () => {
         const placeInput = ReactDOM.findDOMNode(this.placeRef.current);
+        placeInput.value = this.props.defaultEventPlace.defaultPlace;
+        const marker = new google.maps.Marker({position: this.state.geoLocation, map: this.props.map});
+        this.setState({newMarker: marker}, () => {
+          this.state.newMarker.setAnimation(google.maps.Animation.BOUNCE);
+        });
         if(google) {
             const autocomplete = new google.maps.places.Autocomplete(placeInput);
-            // autocomplete.addListener('place_changed', this.fillInAddress(autocomplete));
             autocomplete.addListener('place_changed', () => {
                 this.fillInAddress(autocomplete)
             });
@@ -66,7 +69,9 @@ class AddEvent extends Component {
     handleSubmit = event => {
         event.preventDefault();
 
-        this.state.newMarker.setMap(null);
+        if(this.state.newMarker !== null) {
+            this.state.newMarker.setMap(null);
+        }
         // this.state.newMarker.setAnimation(null);
         // this.state.newMarker.setIcon('https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png');
 
@@ -74,19 +79,18 @@ class AddEvent extends Component {
 
         const title = this.titleRef.current.value;
         const address = this.placeRef.current.value;
-        const category = this.categoryRef.current.value;
+        const category = -1;
         const longitude = this.state.geoLocation.lng.toFixed(5);
         const latitude = this.state.geoLocation.lat.toFixed(5);
         const description = this.descriptionRef.current.value;
         const date = this.timeRef.current.value;
 
-        const duration = this.durationRef.current.value;
-        let expireDays = duration + 1;
-        if(duration === 3) {
+        const duration = this.durationRef.current.checked;
+        let expireDays = 3;
+        //Long-term
+        if(duration === true) {
             expireDays = 365;
         }
-
-        const contact = this.contactRef.current.value;
 
         axios.post(`/event`, 
                 Qs.stringify({ 
@@ -97,8 +101,7 @@ class AddEvent extends Component {
                     latitude,
                     description,
                     date,
-                    expireDays,
-                    contact
+                    expireDays
                 }),
         )
         .then(res => {
@@ -113,6 +116,7 @@ class AddEvent extends Component {
     }
 
     render() {
+
         return (
             <div className="container event">
                 <div className="formDiv">
@@ -130,41 +134,21 @@ class AddEvent extends Component {
                         />
                       </div>
                       <div className="form-group">
-                        <label htmlFor="category">Category</label>
-                        <select className="form-control" id="category" name="category" ref={this.categoryRef}>
-                          <option value="0">Sport</option>
-                          <option value="1">Game</option>
-                          <option value="2">Hobby</option>
-                          <option value="3">Outdoor</option>
-                          <option value="4">Help</option>
-                        </select>
-                      </div>
-                      <div className="form-group">
                         <label htmlFor="place">Place</label>
-                        <input name="place" type="text" className="form-control" id="place" ref={this.placeRef} placeholder="e.g. Long Bridge Park"/>
+                        <input name="place" type="text" className="form-control" id="place" ref={this.placeRef}/>
                       </div>
                       <div className="form-group">
                         <label htmlFor="time">Time</label>
                         <input name="time" type="datetime-local" className="form-control" id="time" ref={this.timeRef} placeholder="e.g. 2018-10-03"/>
                       </div>
                       <div className="form-group">
-                        <label htmlFor="duration">Duration</label>
-                        <select className="form-control" id="duration" name="duration" ref={this.durationRef}>
-                          <option value="0">1 Day</option>
-                          <option value="1">2 Days</option>
-                          <option value="2">3 Days</option>
-                          <option value="3">Long-term</option>
-                        </select>
+                        <input type="radio" id="duration" name="duration" className="form-control" ref={this.durationRef}/>
+                        <label htmlFor="duration">Long-term</label>
                       </div>
                       <div className="form-group">
                         <label htmlFor="description">Description</label>
                         <input name="description" type="text" className="form-control" id="description" ref={this.descriptionRef} placeholder="e.g. This is..."/>
                       </div>
-                      <div className="form-group">
-                        <label htmlFor="contact">Contact</label>
-                        <input name="contact" type="text" className="form-control" id="contact" ref={this.contactRef} placeholder="e.g. wechat:123"/>
-                      </div>
-
                       <button className="btn btn-primary btn-block" type="submit">Publish</button>
                     </form>
 
