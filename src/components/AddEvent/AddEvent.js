@@ -43,6 +43,7 @@ class AddEvent extends Component {
 
         const timeInput = ReactDOM.findDOMNode(this.timeRef.current);
         timeInput.value = dateTime;
+        console.log(timeInput);
     }
 
     initPlaceMap = () => {
@@ -91,9 +92,9 @@ class AddEvent extends Component {
 
         const title = this.titleRef.current.value;
         const address = this.placeRef.current.value;
-        const category = -1;
-        const longitude = this.state.geoLocation.lng.toFixed(5);
-        const latitude = this.state.geoLocation.lat.toFixed(5);
+        const category = 0;
+        const longitude = this.state.geoLocation.lng.toFixed(3);
+        const latitude = this.state.geoLocation.lat.toFixed(3);
         const description = this.descriptionRef.current.value;
         const date = this.timeRef.current.value;
 
@@ -149,15 +150,15 @@ class AddEvent extends Component {
                         <label htmlFor="place">Place</label>
                         <input name="place" type="text" className="form-control" id="place" ref={this.placeRef}/>
                       </div>
-                      <div className="form-group">
-                        <label htmlFor="time">Time</label>
-                        <input name="time" type="datetime-local" className="form-control" id="time" ref={this.timeRef} placeholder="e.g. 2018-10-03"/>
-                      </div>
                       <div className="form-group form-check">
                         <input className="form-check-input" type="checkbox" id="duration" name="duration" ref={this.durationRef}/>
-                        <label className="form-check-label" for="defaultCheck1">
+                        <label className="form-check-label" htmlFor="defaultCheck1">
                         Long-term
                         </label>
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="time">Time</label>
+                        <input name="time" type="datetime-local" className="form-control" id="time" ref={this.timeRef}/>
                       </div>
                       <div className="form-group">
                         <label htmlFor="description">Description</label>

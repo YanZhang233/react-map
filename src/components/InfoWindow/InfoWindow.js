@@ -18,9 +18,7 @@ class InfoWindow extends Component {
                 month: null,
                 time: null,
                 duration: null,
-                category: null,
                 username: null,
-                contact: null,
                 description: null
             }
         };
@@ -56,7 +54,7 @@ class InfoWindow extends Component {
         .then(res => {
             console.log("events",res.data);
             if(res.data.status === 0) {
-                this.setState({events: res.data.data.content}, this.parseEvent);
+                this.setState({events: res.data.data}, this.parseEvent);
                 this.openInfoWindow();
             } else {
                 alert("Loading events failed!");
@@ -122,34 +120,13 @@ class InfoWindow extends Component {
                 break;
         }
 
-        let cat;
-        switch (e.category) {
-            case 0:
-                cat = "Sport";
-                break;
-            case 1:
-                cat = "Game";
-                break;
-            case 2:
-                cat = "Hobby";
-                break;
-            case 3:
-                cat = "Outdoor";
-                break;
-            case 4:
-                cat = "Help";
-                break;
-        }
-
         const event = {
             title: e.title,
             day: e.date.substring(8, 10),
             month: mon,
             time: e.date.substring(11, 16),
             duration: dur,
-            category: cat,
             username: e.username,
-            contact: e.contact,
             description: e.description
         };
 
@@ -189,11 +166,9 @@ class InfoWindow extends Component {
                                 <span className="duration">
                                     <i className="fas fa-calendar-alt"></i> {this.state.event.duration}
                                 </span>
-                                <i className="fas fa-dumbbell"></i> {this.state.event.category}
                                 <div className="username">
                                   <i className="fas fa-user"></i> {this.state.event.username}
                                 </div>
-                                <i className="fas fa-phone"></i> {this.state.event.contact}
                             </div>
                         </div>
                         <div className="description">

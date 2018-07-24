@@ -189,19 +189,19 @@ class Map extends Component {
                     }
                 </div>
 
-                    <div ref="map" className="map">
-                        <Loading />
-                        {this.state.markers !== null?
-                            Object.keys(this.state.markers).map(key => (
-                                <Marker 
-                                    key={key}
-                                    map={this.state.map}
-                                    marker={this.state.markers[key]}
-                                />
-                            ))
-                            :""
-                        }
-                    </div>
+                <div ref="map" className="map">
+                    <Loading />
+                    {this.state.markers !== null?
+                        Object.keys(this.state.markers).map(key => (
+                            <Marker 
+                                key={key}
+                                map={this.state.map}
+                                marker={this.state.markers[key]}
+                            />
+                        ))
+                        :""
+                    }
+                </div>
 
             </div>
         );
