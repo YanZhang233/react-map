@@ -153,9 +153,11 @@ class AddEvent extends Component {
                         <label htmlFor="time">Time</label>
                         <input name="time" type="datetime-local" className="form-control" id="time" ref={this.timeRef} placeholder="e.g. 2018-10-03"/>
                       </div>
-                      <div className="form-group">
-                        <input type="radio" id="duration" name="duration" className="form-control" ref={this.durationRef}/>
-                        <label htmlFor="duration">Long-term</label>
+                      <div className="form-group form-check">
+                        <input className="form-check-input" type="checkbox" id="duration" name="duration" ref={this.durationRef}/>
+                        <label className="form-check-label" for="defaultCheck1">
+                        Long-term
+                        </label>
                       </div>
                       <div className="form-group">
                         <label htmlFor="description">Description</label>
