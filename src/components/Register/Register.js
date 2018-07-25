@@ -34,7 +34,7 @@ class Register extends Component {
         .then(res => {
             console.log(res.data);
             if(res.data.status === 0) {
-                localStorage.setItem('Email', username);
+                localStorage.setItem('Email', email);
                 localStorage.setItem('Password', password);
                 this.props.history.push(`/`);
             } else {

@@ -16,21 +16,22 @@ class Login extends Component {
     handleSubmit = event => {
         event.preventDefault();
 
-        // const email = this.emailRef.current.value;
-        const username = this.emailRef.current.value;
+        const email = this.emailRef.current.value;
         const password = this.passwordRef.current.value;
+
+        const username = email;
 
         axios.post(`/user/login`, 
                 Qs.stringify({ 
-                    username,
                     // email,
+                    username,
                     password
                 }),
         )
         .then(res => {
             console.log(res.data);
             if(res.data.status === 0) {
-                localStorage.setItem('Email', username);
+                localStorage.setItem('Email', email);
                 localStorage.setItem('Password', password);
                 this.props.history.push(`/`);
             } else {

@@ -180,6 +180,8 @@ class Map extends Component {
     handleUser = (event) => {
         if(this.props.user === null) {
             this.props.history.push(`/login`);
+        } else {
+            console.log("user", this.props.user);
         }
     }
 
@@ -204,14 +206,14 @@ class Map extends Component {
                                 {this.props.user === null?
                                     "LogIn"
                                     :
-                                    "MyAccount"
+                                    this.props.user.username
                                 }
                             </a>
                           </li>
                         </ul>
                         <form className="form-inline my-2 my-lg-0">
                           <input className="form-control mr-sm-2" ref={this.searchRef} type="search" placeholder="Search" aria-label="Search"/>
-                          <a className="navbar-brand" href="#"><i className="fas fa-search"></i></a>
+                          <a className="navbar-brand" href="/"><i className="fas fa-search"></i></a>
                         </form>
                       </div>
                     </nav>

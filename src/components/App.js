@@ -19,34 +19,29 @@ class App extends Component {
       const email = localStorage.getItem('Email');
       const password = localStorage.getItem('Password');
 
-      // this.login(email, password);
-      this.loginWithCookie();
-
-      // if(email !== null && password !== null) {
-      //     this.login(email, password);
-      // } else {
-      //     this.loginWithCookie();
-      // }
+      if(email !== null && password !== null) {
+          this.login(email, password);
+      } else {
+          this.loginWithCookie();
+      }
 
     }
 
     login = (email, password) => {
-        const username = email;
 
-        console.log(username);
-        console.log(password);
+        const username = email;
 
         axios.post(`/user/login`, 
                 Qs.stringify({ 
-                    username,
                     // email,
+                    username,
                     password
                 }),
         )
         .then(res => {
             console.log(res.data);
             if(res.data.status === 0) {
-              // this.setState({uid: })
+              this.setState({user: res.data.data})
             } else {
                 alert(res.data.msg);
             }
@@ -59,7 +54,7 @@ class App extends Component {
       .then(res => {
           console.log(res.data);
           if(res.data.status === 0) {
-            // this.setState({ uid: userId, role: userRole });
+            this.setState({user: res.data.data});
           }
       })
     }
@@ -68,7 +63,7 @@ class App extends Component {
       return (
           <div>
             <Map 
-              uid={this.state.uid}
+              user={this.state.user}
             />
           </div>
       );
