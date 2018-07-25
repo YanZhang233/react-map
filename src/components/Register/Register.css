@@ -1,0 +1,28 @@
+.AppearTransition-appear {
+  opacity: 0.01;
+  -webkit-transform: translateY(80px);
+  transform: translateY(80px);
+}
+.AppearTransition-appear.AppearTransition-appear-active {
+  opacity: 1;
+  -webkit-transform: translateY(0px);
+  transform: translateY(0px);
+  -webkit-transition: all 1s ease-out;
+  transition: all 1s ease-out;
+}
+.container {
+  margin-top: 10vh; 
+}
+.formDiv {
+  width: 50%;
+  margin: 0 auto;
+}
+.formHeader {
+  text-align: center;
+}
+.btn-block {
+  margin-top: 2.5rem;
+}
+.login-btn {
+  margin-top: 1rem !important;
+}

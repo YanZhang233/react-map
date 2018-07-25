@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import {Route, withRouter} from 'react-router-dom';
 import './Map.css';
 import Marker from '../Marker/Marker.js';
 import InfoWindow from '../InfoWindow/InfoWindow.js';
@@ -101,7 +102,7 @@ class Map extends Component {
                 this.clearMarkers();
                 this.setState({markers: res.data.data}, this.initMarkerCluster);
             } else {
-                alert("Get events failed!");
+                alert(res.data.msg);
             }
         })
     }
@@ -111,7 +112,7 @@ class Map extends Component {
     }
 
     initMarkerCluster = () => {
-        let clusterStyles = [
+        const clusterStyles = [
           {
             textColor: 'white',
             url: markerClusterIcon,
@@ -119,7 +120,7 @@ class Map extends Component {
             width: 60
           }
         ];
-        let Options = {
+        const Options = {
             styles: clusterStyles
         };
         const markerCluster = new MarkerClusterer(this.state.map, [], Options);
@@ -176,6 +177,12 @@ class Map extends Component {
 
     }
 
+    handleUser = (event) => {
+        if(this.props.user === null) {
+            this.props.history.push(`/login`);
+        }
+    }
+
     render() {
 
         return (
@@ -193,7 +200,13 @@ class Map extends Component {
                             <a className="nav-link" onClick={this.toggleEvent}>Publish</a>
                           </li>
                           <li className="nav-item">
-                            <a className="nav-link" href="#">MyAccount</a>
+                            <a className="nav-link" onClick={this.handleUser}>
+                                {this.props.user === null?
+                                    "LogIn"
+                                    :
+                                    "MyAccount"
+                                }
+                            </a>
                           </li>
                         </ul>
                         <form className="form-inline my-2 my-lg-0">
@@ -236,4 +249,4 @@ class Map extends Component {
 
 }
 
-export default Map;
+export default withRouter(Map);

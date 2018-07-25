@@ -125,7 +125,7 @@ class AddEvent extends Component {
             if(res.data.status === 0) {
                 this.props.changeCenter(this.state.geoLocation);
             } else {
-                alert("Add event failed!");
+                alert(res.data.msg);
             }
         })
         
