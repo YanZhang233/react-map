@@ -3,7 +3,7 @@ import './AddEvent.css';
 import ReactDOM from 'react-dom';
 import axios from "../../base.js";
 import Qs from 'qs';
-import animatedLocationIcon from '../../image/animatedLocation.png';
+import animatedLocationIcon from '../../images/animatedLocation.png';
 
 const google = window.google;
 

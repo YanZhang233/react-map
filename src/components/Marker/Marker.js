@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import InfoWindow from '../InfoWindow/InfoWindow.js';
-import markerIcon from '../../image/marker.png';
+import markerIcon from '../../images/marker.png';
 
 const google = window.google;
 

@@ -8,8 +8,8 @@ import sampleMarkers from '../sample-markers.js';
 import axios from "../../base.js";
 import Loading from "../Loading/Loading.js";
 import MarkerClusterer from '../../markerclusterer.js';
-import currentLocationIcon from '../../image/currentLocation.png';
-import markerClusterIcon from '../../image/markerCluster.png';
+import currentLocationIcon from '../../images/currentLocation.png';
+import markerClusterIcon from '../../images/markerCluster.png';
 
 const google = window.google;
 
@@ -111,8 +111,19 @@ class Map extends Component {
     }
 
     initMarkerCluster = () => {
-        console.log("clusterIcon", markerClusterIcon);
-        const markerCluster = new MarkerClusterer(this.state.map, [], {imagePath: markerClusterIcon});
+        let clusterStyles = [
+          {
+            textColor: 'white',
+            url: markerClusterIcon,
+            height: 60,
+            width: 60
+          }
+        ];
+        let Options = {
+            styles: clusterStyles
+        };
+        const markerCluster = new MarkerClusterer(this.state.map, [], Options);
+        // const markerCluster = new MarkerClusterer(this.state.map, [], {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
         this.setState({markerCluster: markerCluster});
     }
 
