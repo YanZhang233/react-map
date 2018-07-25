@@ -2,14 +2,14 @@
     margin: 0;
     width: 100vw;
     height: 100vh;
-    background: #1E56A0;
+    background: #333366;
 }
 
 .jelly {
     margin: 0;
     width: 100vw;
     height: 60vh;
-    background: #D6E4F0;
+    background: #eeeeee;
     position: relative;
     overflow: hidden;
 }
@@ -17,7 +17,7 @@
 .head {
     width: 40vmin;
     height: 40vmin;
-    background: #163172;
+    background: #333366;
     position: absolute;
     border-radius: 40% 43%;
     left: -7vmin;

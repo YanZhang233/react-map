@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import axios from "../../base.js";
 import "./InfoWindow.css";
 
-const google = window.google;
-
 class InfoWindow extends Component {
 
     constructor(props) {

@@ -3,6 +3,7 @@ import './AddEvent.css';
 import ReactDOM from 'react-dom';
 import axios from "../../base.js";
 import Qs from 'qs';
+import animatedLocationIcon from '../../image/animatedLocation.png';
 
 const google = window.google;
 
@@ -51,6 +52,7 @@ class AddEvent extends Component {
         placeInput.value = this.props.defaultEventPlace.defaultPlace;
         const marker = new google.maps.Marker({position: this.state.geoLocation, map: this.props.map});
         this.setState({newMarker: marker}, () => {
+          this.state.newMarker.setIcon(animatedLocationIcon);
           this.state.newMarker.setAnimation(google.maps.Animation.BOUNCE);
         });
         if(google) {
@@ -75,6 +77,7 @@ class AddEvent extends Component {
         this.props.changeCenter(this.state.geoLocation);
         const marker = new google.maps.Marker({position: this.state.geoLocation, map: this.props.map});
         this.setState({newMarker: marker}, () => {
+          this.state.newMarker.setIcon(animatedLocationIcon);
           this.state.newMarker.setAnimation(google.maps.Animation.BOUNCE);
         });
     }

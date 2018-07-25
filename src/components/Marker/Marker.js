@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import InfoWindow from '../InfoWindow/InfoWindow.js';
+import markerIcon from '../../image/marker.png';
 
 const google = window.google;
 
@@ -18,7 +19,7 @@ class Marker extends Component {
 
     addMarker = (map, marker) => {
 
-        const flag = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+        // const flag = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
 
         // const geocoder = new google.maps.Geocoder();
 
@@ -36,9 +37,11 @@ class Marker extends Component {
             lng: marker.longitude
         };
 
-        const loadMarker = new google.maps.Marker({position: location, map: map, icon: flag, animation: google.maps.Animation.DROP});
+        const loadMarker = new google.maps.Marker({position: location, map: map, icon: markerIcon, animation: google.maps.Animation.DROP});
 
-        this.setState({marker: loadMarker});
+        this.setState({marker: loadMarker}, () => {
+            this.props.pushIntoMarkerCluster(loadMarker);
+        });
 
     }
 

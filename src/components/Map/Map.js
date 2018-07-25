@@ -7,6 +7,9 @@ import Event from '../Event.js';
 import sampleMarkers from '../sample-markers.js';
 import axios from "../../base.js";
 import Loading from "../Loading/Loading.js";
+import MarkerClusterer from '../../markerclusterer.js';
+import currentLocationIcon from '../../image/currentLocation.png';
+import markerClusterIcon from '../../image/markerCluster.png';
 
 const google = window.google;
 
@@ -28,7 +31,8 @@ class Map extends Component {
                     lat: null,
                     lng: null
                 }
-            }
+            },
+            markerCluster: null
         };
 
         this.searchRef = React.createRef();
@@ -59,7 +63,7 @@ class Map extends Component {
 
             this.setState({map: map});
 
-            const marker = new google.maps.Marker({position: currentCenter, map: map, animation: google.maps.Animation.DROP});
+            const marker = new google.maps.Marker({position: currentCenter, map: map, icon: currentLocationIcon, animation: google.maps.Animation.DROP});
 
             this.getMarkers(currentCenter);
 
@@ -92,10 +96,10 @@ class Map extends Component {
         axios.get(`/event?longitude=${center.lng}&latitude=${center.lat}`
         )
         .then(res => {
-            console.log(res.data);
+            console.log("markers", res.data);
             if(res.data.status === 0) {
                 this.clearMarkers();
-                this.setState({markers: res.data.data});
+                this.setState({markers: res.data.data}, this.initMarkerCluster);
             } else {
                 alert("Get events failed!");
             }
@@ -104,6 +108,17 @@ class Map extends Component {
 
     clearMarkers = () => {
         this.setState({ markers: null });
+    }
+
+    initMarkerCluster = () => {
+        console.log("clusterIcon", markerClusterIcon);
+        const markerCluster = new MarkerClusterer(this.state.map, [], {imagePath: markerClusterIcon});
+        this.setState({markerCluster: markerCluster});
+    }
+
+    pushIntoMarkerCluster = (marker) => {
+        this.state.markerCluster.addMarker(marker);
+        // console.log("cluster", this.state.markerCluster);
     }
 
     searchPlace = () => {
@@ -197,6 +212,7 @@ class Map extends Component {
                                 key={key}
                                 map={this.state.map}
                                 marker={this.state.markers[key]}
+                                pushIntoMarkerCluster={this.pushIntoMarkerCluster}
                             />
                         ))
                         :""
