@@ -53,7 +53,7 @@ class Register extends Component {
             transitionLeave={ false }
         >
 
-          <div className="container">
+          <div className="register-container container">
             <div className="formDiv">
               <h3 className="formHeader">SignUp</h3>
               <form onSubmit={this.handleSubmit}>

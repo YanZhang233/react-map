@@ -217,7 +217,6 @@ class Map extends Component {
                         </form>
                       </div>
                     </nav>
-
                     {this.state.displayEvent === true ?
                         <Event 
                             map={this.state.map}

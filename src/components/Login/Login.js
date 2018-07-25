@@ -50,7 +50,7 @@ class Login extends Component {
             transitionLeave={ false }
         >
 
-          <div className="container">
+          <div className="login-container container">
             <div className="formDiv">
               <h3 className="formHeader">LogIn</h3>
               <form onSubmit={this.handleSubmit}>

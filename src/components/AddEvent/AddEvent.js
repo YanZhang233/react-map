@@ -30,6 +30,12 @@ class AddEvent extends Component {
         this.initPlaceMap();
     }
 
+    componentWillUnmount() {
+        if(this.state.newMarker !== null) {
+            this.state.newMarker.setMap(null);
+        }
+    }
+
     initDateTime = () => {
         const today = new Date();
         const day = today.getDate();
@@ -44,7 +50,7 @@ class AddEvent extends Component {
 
         const timeInput = ReactDOM.findDOMNode(this.timeRef.current);
         timeInput.value = dateTime;
-        console.log(timeInput);
+        // console.log(timeInput);
     }
 
     initPlaceMap = () => {
@@ -135,7 +141,7 @@ class AddEvent extends Component {
 
         return (
             <div className="container event">
-                <div className="formDiv">
+                <div className="event-form">
                     <form onSubmit={this.handleSubmit}>
                       <div className="form-group">
                         <label htmlFor="title">Event Title</label>
