@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import axios from "../../base.js";
-import Qs from 'qs';
+import MarketInfo from '../MarketInfo/MarketInfo.js';
 import marketIcon from '../../images/market.png';
 
 const google = window.google;
@@ -10,6 +9,10 @@ class Market extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            markets: []
+
+        };
     }
 
     componentDidMount() {
@@ -48,41 +51,29 @@ class Market extends Component {
         const VAMarker = new google.maps.Marker({position: VALocation, map: this.props.map, icon: marketIcon, animation: google.maps.Animation.DROP});
         const MDMarker = new google.maps.Marker({position: MDLocation, map: this.props.map, icon: marketIcon, animation: google.maps.Animation.DROP});
 
-        DCMarker.addListener("click", () => {
-            this.getMarketGoods(0);
-        });
+        let markets = [];
+        markets.push(DCMarker);
+        markets.push(VAMarker);
+        markets.push(MDMarker);
 
-        VAMarker.addListener("click", () => {
-            this.getMarketGoods(1);
-        });
-
-        MDMarker.addListener("click", () => {
-            this.getMarketGoods(2);
-        });
+        this.setState({markets: markets});
 
     }
-
-    getMarketGoods = (marketId) => {
-        axios.get(`/event/sell/${marketId}`
-        )
-        .then(res => {
-            console.log("market", res.data);
-            // if(res.data.status === 0) {
-            //     this.clearMarkers();
-            //     this.setState({markers: res.data.data}, this.initMarkerCluster);
-            // } else {
-            //     alert(res.data.msg);
-            // }
-        })
-
-    }
-
-
-
-
 
     render() {
-      return null;
+        if(this.state.markets && this.props.map) {
+            return (
+                Object.keys(this.state.markets).map(key => (
+                    <MarketInfo
+                        key={key}
+                        index={key}
+                        map={this.props.map}
+                        marketMarker={this.state.markets[key]}
+                    />
+                ))
+            );
+        } 
+        return null;
     }
 }
 
