@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import axios from "../../base.js";
 import "./InfoWindow.css";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
@@ -21,6 +22,8 @@ class InfoWindow extends Component {
                 description: null
             }
         };
+
+        this.flashRef = React.createRef();
     }
 
     componentDidMount() {
@@ -140,56 +143,65 @@ class InfoWindow extends Component {
             index = 0;
         }
         this.setState({ eventIndex: index }, this.parseEvent);
+
+        this.flashInfowindow();
+    }
+
+    flashInfowindow = () => {
+        const flash = ReactDOM.findDOMNode(this.flashRef.current);
+        flash.classList.add("flash");
+        setTimeout(() => {
+            flash.classList.remove("flash");
+        }, 1000);
     }
 
     render() {
 
         if(this.state.infoOpen === true) {
             return (
-                <div className = "event-cta">
-                    <i className="close far fa-times-circle" onClick={this.closeInfoWindow}></i>
-                    <ReactCSSTransitionGroup
-                        transitionName="InfoFlash"
-                        transitionAppear={ true }
-                        transitionAppearTimeout={ 1000 }
-                        transitionLeaveTimeout={ 1000 }
-                        transitionEnter={ true }
-                        transitionLeave={ true }
-                    >
+                <ReactCSSTransitionGroup
+                    transitionName="InfoWindowAppear"
+                    transitionAppear={ true }
+                    transitionAppearTimeout={ 800 }
+                    transitionEnter={ false }
+                    transitionLeave={ false }
+                >
+                    <div className = "event-cta">
+                        <i className="close far fa-times-circle" onClick={this.closeInfoWindow}></i>
 
-                        <div className="event-info">
-                            <div className="title">{this.state.event.title}</div>
-                            <div className="flex-cta">
-                                <div className="date-cta">
-                                  <div className="date">
-                                    <div className="day">{this.state.event.day}</div>       
-                                    <div>{this.state.event.month}</div>
-                                  </div>
+                            <div className="event-info" ref={this.flashRef}>
+                                <div className="title">{this.state.event.title}</div>
+                                <div className="flex-cta">
+                                    <div className="date-cta">
+                                      <div className="date">
+                                        <div className="day">{this.state.event.day}</div>       
+                                        <div>{this.state.event.month}</div>
+                                      </div>
+                                    </div>
+                                    <div className="detail-cta">
+                                        <div className="address">
+                                            <i className="fas fa-map-marker-alt"></i> {this.props.markerInfo.placeName}
+                                        </div>
+                                        <i className="far fa-clock"></i> {this.state.event.time}
+                                        <span className="duration">
+                                            <i className="fas fa-calendar-alt"></i> {this.state.event.duration}
+                                        </span>
+                                        <div className="username">
+                                          <i className="fas fa-user"></i> {this.state.event.username}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="detail-cta">
-                                    <div className="address">
-                                        <i className="fas fa-map-marker-alt"></i> {this.props.markerInfo.placeName}
-                                    </div>
-                                    <i className="far fa-clock"></i> {this.state.event.time}
-                                    <span className="duration">
-                                        <i className="fas fa-calendar-alt"></i> {this.state.event.duration}
-                                    </span>
-                                    <div className="username">
-                                      <i className="fas fa-user"></i> {this.state.event.username}
-                                    </div>
+                                <div className="description">
+                                    {this.state.event.description}
                                 </div>
                             </div>
-                            <div className="description">
-                                {this.state.event.description}
-                            </div>
+
+                        <div className="shift">
+                            <div className="left" onClick={() => {this.changeEventIndex(this.state.eventIndex - 1)}}><i className="fas fa-chevron-left"></i></div>
+                            <div className="right" onClick={() => {this.changeEventIndex(this.state.eventIndex + 1)}}><i className="fas fa-chevron-right"></i></div>
                         </div>
-
-                    </ReactCSSTransitionGroup>
-                    <div className="shift">
-                        <div className="left" onClick={() => {this.changeEventIndex(this.state.eventIndex - 1)}}><i className="fas fa-chevron-left"></i></div>
-                        <div className="right" onClick={() => {this.changeEventIndex(this.state.eventIndex + 1)}}><i className="fas fa-chevron-right"></i></div>
                     </div>
-                </div>
+                </ReactCSSTransitionGroup>
             );
         }
 

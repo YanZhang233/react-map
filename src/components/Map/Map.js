@@ -9,6 +9,7 @@ import sampleMarkers from '../sample-markers.js';
 import axios from "../../base.js";
 import Loading from "../Loading/Loading.js";
 import MarkerClusterer from '../../markerclusterer.js';
+import Market from '../Market/Market.js';
 import currentLocationIcon from '../../images/currentLocation.png';
 import markerClusterIcon from '../../images/markerCluster.png';
 
@@ -81,6 +82,14 @@ class Map extends Component {
 
             this.setDefaultEventPlace(this.state.currentCenter);
 
+    }
+
+    publishEvent = (event) => {
+        if(this.props.user === null) {
+            this.props.history.push(`/login`);
+        } else {
+            this.toggleEvent(event);
+        }
     }
 
     toggleEvent = (event) => {
@@ -177,13 +186,7 @@ class Map extends Component {
 
     }
 
-    handleUser = (event) => {
-        if(this.props.user === null) {
-            this.props.history.push(`/login`);
-        } else {
-            console.log("user", this.props.user);
-        }
-    }
+
 
     render() {
 
@@ -199,17 +202,30 @@ class Map extends Component {
                       <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
                           <li className="nav-item">
-                            <a className="nav-link" onClick={this.toggleEvent}>Publish</a>
+                            <a className="nav-link" onClick={this.publishEvent}>Publish</a>
                           </li>
-                          <li className="nav-item">
-                            <a className="nav-link" onClick={this.handleUser}>
+                            <li className="nav-item">
                                 {this.props.user === null?
-                                    "LogIn"
+                                    <a className="nav-link" onClick={() => {this.props.history.push(`/login`)}}>
+                                        LogIn
+                                    </a>
                                     :
-                                    this.props.user.username
+                                    <a className="nav-link" onClick={() => {this.props.history.push(`/`)}}>
+                                        {this.props.user.username}
+                                    </a>
                                 }
-                            </a>
-                          </li>
+                            </li>
+                            <li className="nav-item">
+                                {this.props.user === null?
+                                    <a className="nav-link" onClick={() => {this.props.history.push(`/register`)}}>
+                                        SignUp
+                                    </a>
+                                    :
+                                    <a className="nav-link" onClick={this.props.logout}>
+                                        Logout
+                                    </a>
+                                }
+                            </li>
                         </ul>
                         <form className="form-inline my-2 my-lg-0">
                           <input className="form-control mr-sm-2" ref={this.searchRef} type="search" placeholder="Search" aria-label="Search"/>
@@ -231,7 +247,7 @@ class Map extends Component {
 
                 <div ref="map" className="map">
                     <Loading />
-                    {this.state.markers !== null?
+                    {this.state.markers !== null ?
                         Object.keys(this.state.markers).map(key => (
                             <Marker 
                                 key={key}
@@ -243,7 +259,12 @@ class Map extends Component {
                         :""
                     }
                 </div>
-
+                {this.state.map !== null ?
+                    <Market 
+                        map={this.state.map}
+                    />
+                    :""
+                }
             </div>
         );
     }

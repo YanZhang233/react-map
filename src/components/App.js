@@ -59,11 +59,26 @@ class App extends Component {
       })
     }
 
+    logout = (event) => {      
+        console.log("user", this.props.user);
+        axios.get(`/user/logout`
+        )
+        .then(res => {
+            if(res.data.status === 0) {
+                this.setState({ user: null });
+                localStorage.clear();
+            } else {
+                alert(res.data.msg);
+            }
+        })
+    }
+
     render() {
       return (
           <div>
             <Map 
               user={this.state.user}
+              logout={this.logout}
             />
           </div>
       );
