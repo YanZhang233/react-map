@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from "../../base.js";
 import Qs from 'qs';
+import './MarketInfo.css';
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 
 class MarketInfo extends Component {
@@ -25,7 +26,7 @@ class MarketInfo extends Component {
         });
 
         map.addListener("click", () => {
-            this.closeInfoWindow();
+            this.closeMarketInfo();
         });
 
     }
@@ -63,7 +64,31 @@ class MarketInfo extends Component {
                     transitionEnter={ false }
                     transitionLeave={ false }
                 >
-                    
+                    <div className="marketInfo-cta">
+                        <i className="close far fa-times-circle" onClick={this.closeMarketInfo}></i>
+
+                        <div className="market-info">
+                            {this.state.marketInfo !== null ?
+                                Object.keys(this.state.marketInfo).map(key => (
+                                    <div
+                                        key={key}
+                                        className="single-info"
+                                    >
+                                        <div className="subject">{this.state.marketInfo[key].subject}</div>
+                                        <i className="far fa-clock"></i> {this.state.marketInfo[key].publishDate}
+                                        <span className="address">
+                                            <i className="fas fa-map-marker-alt"></i> {this.state.marketInfo[key].address}
+                                        </span>
+                                        <i className="fas fa-user"></i> {this.state.marketInfo[key].username}
+                                        <br/>
+                                        <button className="link" onClick={() => window.open(this.state.marketInfo[key].url)}>View Details</button>
+                                    </div>
+                                ))
+                                :""
+                            }
+                        </div>
+
+                    </div>
                 </ReactCSSTransitionGroup>
             );
         }
