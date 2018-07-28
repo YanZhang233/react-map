@@ -60,7 +60,7 @@ class App extends Component {
     }
 
     logout = (event) => {      
-        console.log("user", this.props.user);
+        console.log("user_logout", this.state.user);
         axios.get(`/user/logout`
         )
         .then(res => {

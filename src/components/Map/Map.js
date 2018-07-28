@@ -25,7 +25,8 @@ class Map extends Component {
                 lng: null
             },
             map: null,
-            displayEvent: false,
+            publish: false,
+            userEvent: true,
             markers: [],
             defaultEventPlace: {
                 defaultPlace: null,
@@ -93,8 +94,8 @@ class Map extends Component {
     }
 
     toggleEvent = (event) => {
-        const display = !this.state.displayEvent;
-        this.setState({displayEvent: display});
+        const publish = !this.state.publish;
+        this.setState({publish: publish});
     }
 
     changeCenter = (center) => {
@@ -186,7 +187,10 @@ class Map extends Component {
 
     }
 
-
+    toggleUser = (event) => {
+        const userEvent = !this.state.userEvent;
+        this.setState({userEvent: userEvent});
+    }
 
     render() {
 
@@ -210,7 +214,7 @@ class Map extends Component {
                                         LogIn
                                     </a>
                                     :
-                                    <a className="nav-link" onClick={() => {this.props.history.push(`/`)}}>
+                                    <a className="nav-link" onClick={this.toggleUser}>
                                         {this.props.user.username}
                                     </a>
                                 }
@@ -233,16 +237,17 @@ class Map extends Component {
                         </form>
                       </div>
                     </nav>
-                    {this.state.displayEvent === true ?
-                        <Event 
-                            map={this.state.map}
-                            changeCenter={this.changeCenter}
-                            toggleEvent={this.toggleEvent}
-                            markers={this.state.markers}
-                            defaultEventPlace={this.state.defaultEventPlace}
-                        />
-                        :""
-                    }
+                    <Event 
+                        map={this.state.map}
+                        changeCenter={this.changeCenter}
+                        toggleEvent={this.toggleEvent}
+                        toggleUser={this.toggleUser}
+                        markers={this.state.markers}
+                        defaultEventPlace={this.state.defaultEventPlace}
+                        publish={this.state.publish}
+                        user={this.props.user}
+                        userEvent={this.state.userEvent}
+                    />
                 </div>
 
                 <div ref="map" className="map">

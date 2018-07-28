@@ -1,0 +1,29 @@
+.event {
+    position: absolute;
+    z-index: 1;
+    margin: 0;
+    width: 35%;
+    background: white;
+    animation: toggle 500ms ease-out;
+}
+
+.event-form {
+    width: 80%;
+    margin: 2vh auto;
+}
+
+@media (max-width: 800px) {
+    .event {
+        top: 115vmin;
+        width: 100vw;
+    }
+}
+
+@keyframes toggle {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}

@@ -146,7 +146,7 @@ class AddEvent extends Component {
                       <div className="form-group">
                         <label htmlFor="title">Event Title</label>
                         <input 
-                            
+                            required
                             name="title"
                             type="text" 
                             className="form-control" 
@@ -157,17 +157,17 @@ class AddEvent extends Component {
                       </div>
                       <div className="form-group">
                         <label htmlFor="place">Place</label>
-                        <input name="place" type="text" className="form-control" id="place" ref={this.placeRef}/>
+                        <input required name="place" type="text" className="form-control" id="place" ref={this.placeRef}/>
                       </div>
                       <div className="form-group form-check">
                         <input className="form-check-input" type="checkbox" id="duration" name="duration" ref={this.durationRef}/>
-                        <label className="form-check-label" htmlFor="defaultCheck1">
+                        <label className="form-check-label" htmlFor="duration">
                         Long-term
                         </label>
                       </div>
                       <div className="form-group">
                         <label htmlFor="time">Time</label>
-                        <input name="time" type="datetime-local" className="form-control" id="time" ref={this.timeRef}/>
+                        <input required name="time" type="datetime-local" className="form-control" id="time" ref={this.timeRef}/>
                       </div>
                       <div className="form-group">
                         <label htmlFor="description">Description</label>
