@@ -18,7 +18,7 @@ class Event extends Component {
         this.setState({event: event});
     }
 
-    deleteEvent = (event) => {
+    deleteEvent = () => {
         const cancel = window.confirm("Are you sure to delete your event?");
         if(cancel) {
             axios.delete(`/event/${this.state.event.id}`

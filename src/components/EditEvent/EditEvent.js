@@ -91,7 +91,7 @@ class EditEvent extends Component {
 
         const title = this.titleRef.current.value;
         const address = this.placeRef.current.value;
-        const category = 0;
+        const category = 2;
         const longitude = this.state.geoLocation.lng.toFixed(3);
         const latitude = this.state.geoLocation.lat.toFixed(3);
         const description = this.descriptionRef.current.value;
@@ -104,7 +104,9 @@ class EditEvent extends Component {
             expireDays = 365;
         }
 
-        axios.post(`/event/${this.props.event.id}`, 
+        const placeId = this.props.event.placeId;
+
+        axios.patch(`/event/${this.props.event.id}`, 
                 Qs.stringify({ 
                     title,
                     address, 
@@ -113,7 +115,8 @@ class EditEvent extends Component {
                     latitude,
                     description,
                     date,
-                    expireDays
+                    expireDays,
+                    placeId
                 }),
         )
         .then(res => {

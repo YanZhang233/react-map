@@ -26,7 +26,7 @@ class Map extends Component {
             },
             map: null,
             publish: false,
-            userEvent: true,
+            userEvent: false,
             markers: [],
             defaultEventPlace: {
                 defaultPlace: null,
