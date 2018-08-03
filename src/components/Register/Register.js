@@ -3,16 +3,27 @@ import './Register.css';
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import axios from "../../base.js";
 import Qs from 'qs';
+import ReactDOM from 'react-dom';
 
 class Register extends Component {
 
     constructor(props) {
         super(props);
 
+        this.state = {
+            alert: null
+        };
+
         this.emailRef = React.createRef();
         this.usernameRef = React.createRef();
         this.genderRef = React.createRef();
         this.passwordRef = React.createRef();
+    }
+
+    componentDidMount() {
+        // const emailInput = ReactDOM.findDOMNode(this.emailRef.current);
+        // console.log("email", emailInput.on());
+
     }
 
     handleSubmit = event => {
@@ -43,6 +54,25 @@ class Register extends Component {
         })
     }
 
+    validateEmail = (event) => {
+        const email = this.emailRef.current.value;
+
+        axios.post(`/user/check_email`, 
+                Qs.stringify({ 
+                    email
+                }),
+        )
+        .then(res => {
+            console.log(res.data);
+            if(res.data.status === 0) {
+                
+            } else {
+                
+            }
+        })
+
+    }
+
     render() {
       return (
         <ReactCSSTransitionGroup
@@ -52,8 +82,13 @@ class Register extends Component {
             transitionEnter={ false }
             transitionLeave={ false }
         >
-
           <div className="register-container container">
+          {this.state.alert !== null ?
+            <div className="alert alert-danger" role="alert">
+              {this.state.alert}
+            </div>
+            :""
+          }
             <div className="formDiv">
               <h3 className="formHeader">SignUp</h3>
               <form onSubmit={this.handleSubmit}>
@@ -63,7 +98,7 @@ class Register extends Component {
                 </div>
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
-                  <input required type="email" className="form-control" id="email" ref={this.emailRef} />
+                  <input required onBlur={this.validateEmail} type="email" className="form-control" id="email" ref={this.emailRef} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="gender">Gender</label>
@@ -74,7 +109,7 @@ class Register extends Component {
                 </div>
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
-                  <input required type="password" className="form-control" id="password" ref={this.passwordRef}/>
+                  <input pattern=".{6,}" required title="6 characters minimum" type="password" className="form-control" id="password" ref={this.passwordRef}/>
                 </div>
                 <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
                 <button className="login-btn btn btn-primary btn-block" onClick={() => {this.props.history.push(`/login`)}}>Log In</button>

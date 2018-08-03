@@ -24,7 +24,7 @@
 }
 .event-info {
     width: 100%;
-    height: 93%;
+    height: 85%;
     padding: 0 10px;
     overflow: scroll;
     box-sizing: border-box;
@@ -104,9 +104,14 @@
   padding: 15px;
   cursor: pointer;
 }
+.index {
+  width: 100%;
+  text-align: center;
+  margin: 20px 0;
+}
 
 .flash {
-  animation: info-flash 1000ms ease-out;
+  animation: info-flash 2000ms ease-out;
 }
 
 @keyframes info-flash {
@@ -114,7 +119,7 @@
       opacity: 0.01;
       /*transform: translateY(50px) skewY(20deg) rotateX(80deg);*/
       /*transform: translateX(-100px) skewY(-20deg) scaleX(0.3) rotateY(-100deg);*/
-      transform: rotateZ(50deg);
+      transform: translateX(150px);
     }
     30% {
       opacity: 0.3;

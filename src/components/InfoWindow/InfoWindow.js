@@ -196,6 +196,10 @@ class InfoWindow extends Component {
                                 </div>
                             </div>
 
+                        <div className="index">
+                            {this.state.eventIndex + 1} / {this.state.events.length}
+                        </div>
+
                         <div className="shift">
                             <div className="left" onClick={() => {this.changeEventIndex(this.state.eventIndex - 1)}}><i className="fas fa-chevron-left"></i></div>
                             <div className="right" onClick={() => {this.changeEventIndex(this.state.eventIndex + 1)}}><i className="fas fa-chevron-right"></i></div>
