@@ -86,8 +86,6 @@ class EditEvent extends Component {
         if(this.state.newMarker !== null) {
             this.state.newMarker.setMap(null);
         }
-        
-        this.props.toggleUser();
 
         const title = this.titleRef.current.value;
         const address = this.placeRef.current.value;
@@ -123,6 +121,7 @@ class EditEvent extends Component {
             console.log(res.data);
             if(res.data.status === 0) {
                 this.props.changeCenter(this.state.geoLocation);
+                this.props.backToUser();
             } else {
                 alert(res.data.msg);
             }
@@ -134,6 +133,7 @@ class EditEvent extends Component {
         if(this.props.event !== null) {
             return (
                 <div className="container event">
+                    <i className="close fas fa-chevron-left" onClick={this.props.backToUser}></i>
                     <div className="event-form">
                         <form onSubmit={this.handleSubmit}>
                           <div className="form-group">
@@ -166,7 +166,7 @@ class EditEvent extends Component {
                             <input name="description" type="text" className="form-control" id="description" ref={this.descriptionRef} />
                           </div>
                           <button className="btn btn-primary btn-block" type="submit">Save</button>
-                          <button className="btn btn-primary btn-block" onClick={() => {this.props.deleteEvent}}>Delete</button>
+                          <button className="btn btn-primary btn-block" onClick={this.props.deleteEvent}>Delete</button>
                         </form>
 
                     </div>

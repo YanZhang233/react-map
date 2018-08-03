@@ -166,10 +166,10 @@ class InfoWindow extends Component {
                     transitionEnter={ false }
                     transitionLeave={ false }
                 >
-                    <div className = "event-cta swiper-container">
+                    <div className = "event-cta">
                         <i className="close far fa-times-circle" onClick={this.closeInfoWindow}></i>
 
-                            <div className="event-info swiper-wrapper" ref={this.flashRef}>
+                            <div className="event-info" ref={this.flashRef}>
                                 <div className="title">{this.state.event.title}</div>
                                 <div className="flex-cta">
                                     <div className="date-cta">
@@ -197,10 +197,9 @@ class InfoWindow extends Component {
                             </div>
 
                         <div className="shift">
-                            <div className="left swiper-button-prev" onClick={() => {this.changeEventIndex(this.state.eventIndex - 1)}}><i className="fas fa-chevron-left"></i></div>
-                            <div className="right swiper-button-next" onClick={() => {this.changeEventIndex(this.state.eventIndex + 1)}}><i className="fas fa-chevron-right"></i></div>
+                            <div className="left" onClick={() => {this.changeEventIndex(this.state.eventIndex - 1)}}><i className="fas fa-chevron-left"></i></div>
+                            <div className="right" onClick={() => {this.changeEventIndex(this.state.eventIndex + 1)}}><i className="fas fa-chevron-right"></i></div>
                         </div>
-                        <div className="swiper-pagination"></div>
 
                     </div>
                 </ReactCSSTransitionGroup>

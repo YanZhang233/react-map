@@ -18,19 +18,24 @@ class Event extends Component {
         this.setState({event: event});
     }
 
-    deleteEvent = () => {
+    deleteEvent = (event) => {
         const cancel = window.confirm("Are you sure to delete your event?");
         if(cancel) {
             axios.delete(`/event/${this.state.event.id}`
               )
               .then(res => {
+                  console.log("delete", res.data);
                   if(res.data.status === 0) {
-                    this.setState({ event: null });
+                    this.backToUser();
                   } else {
                     alert(res.data.msg);
                   }
               })
         }
+    }
+
+    backToUser = () => {
+        this.setState({event: null});
     }
 
   render() {
@@ -53,6 +58,7 @@ class Event extends Component {
                     event={this.state.event} 
                     toggleUser={this.props.toggleUser}
                     deleteEvent={this.deleteEvent}
+                    backToUser={this.backToUser}
                 />
             );
         }
