@@ -94,6 +94,10 @@ class Map extends Component {
     }
 
     toggleEvent = (event) => {
+        if(this.state.userEvent === true) {
+            this.setState({userEvent: false});
+        }
+
         const publish = !this.state.publish;
         this.setState({publish: publish});
     }
@@ -188,6 +192,10 @@ class Map extends Component {
     }
 
     toggleUser = (event) => {
+        if(this.state.publish === true) {
+            this.setState({publish: false});
+        }
+        
         const userEvent = !this.state.userEvent;
         this.setState({userEvent: userEvent});
     }

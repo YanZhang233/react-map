@@ -38,7 +38,10 @@ class AddEvent extends Component {
 
     initDateTime = () => {
         const today = new Date();
-        const day = today.getDate();
+        let day = today.getDate();
+        if(day < 10) {
+            day = "0" + day;
+        }
         let month = today.getMonth() + 1;
         if(month < 10) {
             month = "0" + month;
@@ -50,7 +53,6 @@ class AddEvent extends Component {
 
         const timeInput = ReactDOM.findDOMNode(this.timeRef.current);
         timeInput.value = dateTime;
-        // console.log(timeInput);
     }
 
     initPlaceMap = () => {

@@ -53,12 +53,12 @@ class EditEvent extends Component {
         timeInput.value = event.date;
         descriptionInput.value = event.description;
 
-        if(google) {
-            const autocomplete = new google.maps.places.Autocomplete(placeInput);
-            autocomplete.addListener('place_changed', () => {
-                this.fillInAddress(autocomplete)
-            });
-        }
+        // if(google) {
+        //     const autocomplete = new google.maps.places.Autocomplete(placeInput);
+        //     autocomplete.addListener('place_changed', () => {
+        //         this.fillInAddress(autocomplete)
+        //     });
+        // }
     }
 
     fillInAddress = (autocomplete) => {
@@ -149,7 +149,7 @@ class EditEvent extends Component {
                           </div>
                           <div className="form-group">
                             <label htmlFor="place">Place</label>
-                            <input required name="place" type="text" className="form-control" id="place" ref={this.placeRef}/>
+                            <input readOnly name="place" type="text" className="form-control" id="place" ref={this.placeRef}/>
                           </div>
                           <div className="form-group form-check">
                             <input className="form-check-input" type="checkbox" id="duration" name="duration" ref={this.durationRef}/>
