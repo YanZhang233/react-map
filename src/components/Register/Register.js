@@ -57,20 +57,14 @@ class Register extends Component {
     validateEmail = (event) => {
         const email = this.emailRef.current.value;
 
-        axios.post(`/user/check_email`, 
-                Qs.stringify({ 
-                    email
-                }),
+        axios.get(`/user/check_email/?email=${email}`
         )
         .then(res => {
-            console.log(res.data);
-            if(res.data.status === 0) {
-                
-            } else {
-                
+            // console.log(res.data);
+            if(res.data.status === 1) {
+                this.setState({alert: res.data.msg});
             }
         })
-
     }
 
     render() {
