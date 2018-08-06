@@ -59,6 +59,13 @@ class EditEvent extends Component {
         //         this.fillInAddress(autocomplete)
         //     });
         // }
+
+        const geoLocation = {
+            lat: event.latitude,
+            lng: event.longitude
+        };
+
+        this.props.changeCenter(geoLocation);
     }
 
     fillInAddress = (autocomplete) => {

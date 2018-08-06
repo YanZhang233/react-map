@@ -43,11 +43,15 @@ class InfoWindow extends Component {
     }
 
     openInfoWindow = () => {
-        this.setState({infoOpen: true});
+        if(this.state.infoOpen === false) {
+            this.setState({infoOpen: true});
+        }
     }
 
     closeInfoWindow = () => {
-        this.setState({infoOpen: false});
+        if(this.state.infoOpen === true) {
+            this.setState({infoOpen: false});
+        }
     }
 
     getEvents = (id) => {

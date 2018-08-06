@@ -19,6 +19,12 @@ class Event extends Component {
     }
 
     deleteEvent = (event) => {
+        
+        const geoLocation = {
+            lat: event.latitude,
+            lng: event.longitude
+        };
+
         const cancel = window.confirm("Are you sure to delete your event?");
         if(cancel) {
             axios.delete(`/event/${this.state.event.id}`, null
@@ -26,6 +32,7 @@ class Event extends Component {
               .then(res => {
                   console.log("delete", res.data);
                   if(res.data.status === 0) {
+                    this.props.changeCenter(geoLocation);
                     this.backToUser();
                   } else {
                     alert(res.data.msg);
