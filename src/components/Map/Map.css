@@ -1,17 +1,19 @@
 .toggle-cta {
     position: relative;
+    font-family: 'PT Sans', sans-serif;
+    text-transform: uppercase;
 }
 a {
     cursor: pointer;
 }
 .navItem {
-    margin: 0 5px;
+    margin: 0 15px;
 }
 .search {
     position: fixed;
     z-index: 2;
-    left: 20px;
-    top: 20vh;
+    right: 40px;
+    top: 11vh;
 }
 input[type=search] {
     background: #89a4c7 url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
@@ -38,6 +40,13 @@ input[type=search]:focus {
     margin: 0;
     width: 100vw;
     height: 100vh;
+}
+
+@media (max-width: 800px) {
+    .search {
+        left: 20px;
+        top: 17vh;
+    }
 }
 
 @keyframes floating {

@@ -227,9 +227,6 @@ class Map extends Component {
                             </a>
                        }
                     </nav>
-                    <div className="search">
-                       <input className="form-control mr-sm-2" ref={this.searchRef} type="search" placeholder="Search..." aria-label="Search"/>
-                    </div>
                     <Event 
                         map={this.state.map}
                         changeCenter={this.changeCenter}
@@ -241,6 +238,10 @@ class Map extends Component {
                         user={this.props.user}
                         userEvent={this.state.userEvent}
                     />
+                </div>
+                
+                <div className="search">
+                   <input className="form-control mr-sm-2" ref={this.searchRef} type="search" placeholder="Search..." aria-label="Search"/>
                 </div>
 
                 <div ref="map" className="map">
