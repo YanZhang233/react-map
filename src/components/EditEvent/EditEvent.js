@@ -5,7 +5,7 @@ import axios from "../../base.js";
 import Qs from 'qs';
 import markerIcon from '../../images/marker.png';
 
-const google = window.google;
+/*global google*/
 
 class EditEvent extends Component {
 
