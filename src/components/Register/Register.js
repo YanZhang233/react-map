@@ -102,7 +102,7 @@ class Register extends Component {
                     </select>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="password">Password</label>
+                  <label htmlFor="password">Password (6 characters minimum)</label>
                   <input pattern=".{6,}" required title="6 characters minimum" type="password" className="form-control" id="password" ref={this.passwordRef}/>
                 </div>
                 <button type="submit" className="btn btn-primary btn-block">Sign Up</button>

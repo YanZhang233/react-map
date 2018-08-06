@@ -4,8 +4,49 @@
 a {
     cursor: pointer;
 }
+.navItem {
+    margin: 0 5px;
+}
+.search {
+    position: fixed;
+    z-index: 2;
+    left: 20px;
+    top: 20vh;
+}
+input[type=search] {
+    background: #89a4c7 url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
+    border: solid 2px #ccc;
+    border-radius: 30px;
+    padding: 9px 10px 9px 32px;
+    width: 15px;
+    transition: all .5s;
+    animation: floating 1.2s linear alternate infinite;
+}
+input[type=search]:hover {
+    background-color: #fff;
+    border: solid 2px #89a4c7;
+    cursor: pointer;
+}
+input[type=search]:focus {
+    width: 340px;
+    padding-left: 32px;
+    color: #000;
+    background-color: #fff;
+    cursor: pointer;
+}
 .map {
     margin: 0;
     width: 100vw;
     height: 100vh;
+}
+
+@keyframes floating {
+    from {
+        box-shadow: 0 7px 7px #c7c7c7;
+        transform: translateY(0px);
+    }
+    to {
+        box-shadow: 0 3px 3px #c7c7c7;
+        transform: translateY(3px);
+    }
 }

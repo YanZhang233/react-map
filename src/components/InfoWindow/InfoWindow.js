@@ -18,7 +18,7 @@ class InfoWindow extends Component {
                 month: null,
                 time: null,
                 duration: null,
-                username: null,
+                userName: null,
                 description: null
             }
         };
@@ -118,7 +118,7 @@ class InfoWindow extends Component {
                 dur = "3Days";
                 break;
             default:
-                dur = "1Year";
+                dur = "Long-term";
                 break;
         }
 
@@ -128,7 +128,7 @@ class InfoWindow extends Component {
             month: mon,
             time: e.date.substring(11, 16),
             duration: dur,
-            username: e.username,
+            userName: e.userName,
             description: e.description
         };
 
@@ -179,7 +179,7 @@ class InfoWindow extends Component {
                                       </div>
                                     </div>
                                     <div className="detail-cta">
-                                        <div className="address">
+                                        <div className="place">
                                             <i className="fas fa-map-marker-alt"></i> {this.props.markerInfo.placeName}
                                         </div>
                                         <i className="far fa-clock"></i> {this.state.event.time}
@@ -187,7 +187,7 @@ class InfoWindow extends Component {
                                             <i className="fas fa-calendar-alt"></i> {this.state.event.duration}
                                         </span>
                                         <div className="username">
-                                          <i className="fas fa-user"></i> {this.state.event.username}
+                                          <i className="fas fa-user"></i> {this.state.event.userName}
                                         </div>
                                     </div>
                                 </div>

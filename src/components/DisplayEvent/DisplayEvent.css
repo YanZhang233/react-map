@@ -37,7 +37,7 @@
 }
 
 @media (max-width: 800px) {
-    .event {
+    .user-cta {
         top: 115vmin;
         width: 100vw;
     }

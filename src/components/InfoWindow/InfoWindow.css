@@ -1,7 +1,7 @@
 .event-cta {
     position: relative;
-    width: 420px;
-    height: 610px;
+    width: 350px;
+    height: 550px;
     top: 3vh;
     margin: auto;
     background: #f6f6f6;
@@ -37,7 +37,7 @@
     font-family: 'Knewave', cursive;
 }
 .flex-cta {
-    height: 30%;
+    height: 40%;
     display: flex;
     align-items: center;
 }
@@ -61,14 +61,14 @@
 .detail-cta {
   width: 70%;
 }
-.address {
-  margin: 5px 0;
+.place {
+  margin: 7px 0;
 }
 .duration {
   margin: 0 30px;
 }
 .username {
-  margin: 5px 0;
+  margin: 7px 0;
 }
 .description {
   padding: 0 20px;
@@ -76,32 +76,32 @@
 .shift {
   position: relative;
   bottom: 40%;
-  height: 100px;
+  height: 80px;
 }
 .left {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   background: white; 
   position: absolute;
-  left: -60px;
+  left: -20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: center;
   font-size: 3rem;
-  padding: 15px;
+  padding: 8px;
   cursor: pointer;
 }
 .right {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   background: white; 
   position: absolute;
-  right: -60px;
+  right: -20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: center;
   font-size: 3rem;
-  padding: 15px;
+  padding: 8px;
   cursor: pointer;
 }
 .index {

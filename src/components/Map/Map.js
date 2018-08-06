@@ -207,44 +207,29 @@ class Map extends Component {
                 <div className="toggle-cta">
                     <nav className="navbar navbar-expand-lg navbar-light bg-light">
                       <a className="navbar-brand" href="/"><i className="fas fa-map-marker-alt"></i></a>
-                      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                      </button>
-
-                      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav mr-auto">
-                          <li className="nav-item">
-                            <a className="nav-link" onClick={this.publishEvent}>Publish</a>
-                          </li>
-                            <li className="nav-item">
-                                {this.props.user === null?
-                                    <a className="nav-link" onClick={() => {this.props.history.push(`/login`)}}>
-                                        LogIn
-                                    </a>
-                                    :
-                                    <a className="nav-link" onClick={this.toggleUser}>
-                                        {this.props.user.username}
-                                    </a>
-                                }
-                            </li>
-                            <li className="nav-item">
-                                {this.props.user === null?
-                                    <a className="nav-link" onClick={() => {this.props.history.push(`/register`)}}>
-                                        SignUp
-                                    </a>
-                                    :
-                                    <a className="nav-link" onClick={this.props.logout}>
-                                        Logout
-                                    </a>
-                                }
-                            </li>
-                        </ul>
-                        <form className="form-inline my-2 my-lg-0">
-                          <input className="form-control mr-sm-2" ref={this.searchRef} type="search" placeholder="Search" aria-label="Search"/>
-                          <a className="navbar-brand" href="/"><i className="fas fa-search"></i></a>
-                        </form>
-                      </div>
+                      <a className="navItem" onClick={this.publishEvent}>Publish</a>
+                      {this.props.user === null?
+                            <a className="navItem" onClick={() => {this.props.history.push(`/login`)}}>
+                                LogIn
+                            </a>
+                            :
+                            <a className="navItem" onClick={this.toggleUser}>
+                                {this.props.user.username}
+                            </a>
+                      }
+                      {this.props.user === null?
+                            <a className="navItem" onClick={() => {this.props.history.push(`/register`)}}>
+                                SignUp
+                            </a>
+                            :
+                            <a className="navItem" onClick={this.props.logout}>
+                                Logout
+                            </a>
+                       }
                     </nav>
+                    <div className="search">
+                       <input className="form-control mr-sm-2" ref={this.searchRef} type="search" placeholder="Search..." aria-label="Search"/>
+                    </div>
                     <Event 
                         map={this.state.map}
                         changeCenter={this.changeCenter}

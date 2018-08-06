@@ -21,7 +21,7 @@ class Event extends Component {
     deleteEvent = (event) => {
         const cancel = window.confirm("Are you sure to delete your event?");
         if(cancel) {
-            axios.delete(`/event/${this.state.event.id}`
+            axios.delete(`/event/${this.state.event.id}`, null
               )
               .then(res => {
                   console.log("delete", res.data);
