@@ -13,7 +13,7 @@ import Market from '../Market/Market.js';
 import currentLocationIcon from '../../images/currentLocation.png';
 import markerClusterIcon from '../../images/markerCluster.png';
 
-const google = window.google;
+/*global google*/
 
 class Map extends Component {
 
@@ -42,46 +42,49 @@ class Map extends Component {
     }
 
     componentDidMount() {
-        // if(google) {
-            navigator.geolocation.getCurrentPosition((position) => {
-                this.setState({
-                    currentCenter: {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    }
-                }, this.initMap);
+
+        navigator.geolocation.getCurrentPosition((position) => {
+            this.setState({
+                currentCenter: {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                }
+            }, () => {
+                this.initMap();
+                this.searchPlace();
             });
-            this.searchPlace();
-        // }
+        });
+  
     }
 
     initMap = () => {
 
-            const node = ReactDOM.findDOMNode(this.refs.map);
-            const currentCenter = this.state.currentCenter;
-            const map = new google.maps.Map(node, {
-                zoom: 16,
-                center: currentCenter
-            });
+        const node = ReactDOM.findDOMNode(this.refs.map);
+        const currentCenter = this.state.currentCenter;
 
-            this.setState({map: map});
+        const map = new google.maps.Map(node, {
+            zoom: 16,
+            center: currentCenter
+        });
 
-            const marker = new google.maps.Marker({position: currentCenter, map: map, icon: currentLocationIcon, animation: google.maps.Animation.DROP});
+        this.setState({map: map});
 
-            this.getMarkers(currentCenter);
+        const marker = new google.maps.Marker({position: currentCenter, map: map, icon: currentLocationIcon, animation: google.maps.Animation.DROP});
 
-            map.addListener("dragend", () => {
-                const center = {
-                    lat: map.getCenter().lat(),
-                    lng: map.getCenter().lng()
-                }
-                if(Math.abs(center.lat - this.state.currentCenter.lat) > 0.04 || Math.abs(center.lng - this.state.currentCenter.lng) > 0.04) {
-                    this.setState({ currentCenter: center }, this.getMarkers(center));
-                    this.setDefaultEventPlace(center);
-                }
-            });
+        this.getMarkers(currentCenter);
 
-            this.setDefaultEventPlace(this.state.currentCenter);
+        map.addListener("dragend", () => {
+            const center = {
+                lat: map.getCenter().lat(),
+                lng: map.getCenter().lng()
+            }
+            if(Math.abs(center.lat - this.state.currentCenter.lat) > 0.04 || Math.abs(center.lng - this.state.currentCenter.lng) > 0.04) {
+                this.setState({ currentCenter: center }, this.getMarkers(center));
+                this.setDefaultEventPlace(center);
+            }
+        });
+
+        this.setDefaultEventPlace(this.state.currentCenter);
 
     }
 
@@ -149,12 +152,10 @@ class Map extends Component {
 
     searchPlace = () => {
         const searchInput = ReactDOM.findDOMNode(this.searchRef.current);
-        if(google) {
-            const autocomplete = new google.maps.places.Autocomplete(searchInput);
-            autocomplete.addListener('place_changed', () => {
-                this.fillInSearchAddress(autocomplete)
-            });
-        }
+        const autocomplete = new google.maps.places.Autocomplete(searchInput);
+        autocomplete.addListener('place_changed', () => {
+            this.fillInSearchAddress(autocomplete)
+        });
     }
 
     fillInSearchAddress = (autocomplete) => {

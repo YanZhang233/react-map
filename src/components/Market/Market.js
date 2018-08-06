@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MarketInfo from '../MarketInfo/MarketInfo.js';
 import marketIcon from '../../images/market.png';
 
-const google = window.google;
+/*global google*/
 
 class Market extends Component {
 

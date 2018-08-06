@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import InfoWindow from '../InfoWindow/InfoWindow.js';
 import markerIcon from '../../images/marker.png';
 
-const google = window.google;
+/*global google*/
 
 class Marker extends Component {
 
