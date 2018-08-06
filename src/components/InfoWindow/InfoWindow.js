@@ -156,7 +156,7 @@ class InfoWindow extends Component {
         flash.classList.add("flash");
         setTimeout(() => {
             flash.classList.remove("flash");
-        }, 1000);
+        }, 200);
     }
 
     render() {
