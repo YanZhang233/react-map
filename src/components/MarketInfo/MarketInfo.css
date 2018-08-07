@@ -1,9 +1,9 @@
 .marketInfo-cta {
     position: fixed;
-    width: 420px;
-    height: 610px;
-    top: 10vh;
-    left: 33vw;
+    width: 350px;
+    height: 550px;
+    top: 3vh;
+    left: 35vw;
     background: #f6f6f6;
     border-radius: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -44,5 +44,13 @@
 }
 .link:focus {
     outline: none;
+}
+
+@media (max-width: 800px) {
+    .marketInfo-cta {
+        z-index: 3;
+        top: 10vh;
+        left: 3.5vw;
+    }
 }
 
