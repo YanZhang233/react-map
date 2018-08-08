@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import InfoWindow from '../InfoWindow/InfoWindow.js';
 import markerIcon from '../../images/marker.png';
+import './Marker.css';
 
 /*global google*/
 
@@ -9,7 +10,8 @@ class Marker extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            marker: null
+            marker: null,
+            eventTitles: []
         };
     }
 
@@ -39,10 +41,34 @@ class Marker extends Component {
 
         const loadMarker = new google.maps.Marker({position: location, map: map, icon: markerIcon, animation: google.maps.Animation.DROP});
 
-        this.setState({marker: loadMarker}, () => {
+        this.setState({marker: loadMarker, eventTitles: marker.eventTitles}, () => {
             this.props.pushIntoMarkerCluster(loadMarker);
+            this.addInfoTitle(map, loadMarker);
         });
 
+    }
+
+    addInfoTitle = (map, marker) => {
+        let infoTitle = new google.maps.InfoWindow();
+
+        if(this.state.eventTitles === 1) {
+            infoTitle.setContent(
+                "<div class='titleCarousel'>" + this.state.eventTitles[0] + "</div>"
+            );
+        } else {
+            let i = 0;
+            setInterval(() => {
+                if(i === this.state.eventTitles.length) {
+                    i = 0;
+                }
+                infoTitle.setContent(
+                    "<div class='titleCarousel'>" + this.state.eventTitles[i] + "</div>"
+                );
+                i++;
+            }, 2000);
+        }
+        
+        infoTitle.open(map, marker);
     }
 
     render() {

@@ -1,0 +1,10 @@
+.titleCarousel {
+    width: 70px;
+    height: 20px;
+    font-size: 1rem;
+    font-family: 'PT Sans', sans-serif; 
+    text-transform: uppercase; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+}

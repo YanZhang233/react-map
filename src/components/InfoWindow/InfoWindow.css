@@ -1,5 +1,6 @@
 .event-cta {
     position: relative;
+    z-index: 3;
     width: 350px;
     height: 550px;
     top: 3vh;
