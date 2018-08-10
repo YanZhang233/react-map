@@ -154,7 +154,8 @@ class Map extends Component {
         const searchInput = ReactDOM.findDOMNode(this.searchRef.current);
         const autocomplete = new google.maps.places.Autocomplete(searchInput);
         autocomplete.addListener('place_changed', () => {
-            this.fillInSearchAddress(autocomplete)
+            this.fillInSearchAddress(autocomplete);
+            searchInput.value = null;
         });
     }
 
