@@ -17,11 +17,18 @@ class Marker extends Component {
     }
 
     componentDidMount() {
-        this.addMarker(this.props.map, this.props.marker);
+        if(this.props.marker.eventNum > 0) {
+            this.addMarker(this.props.map, this.props.marker);
+        }
     }
 
     componentWillUnmount() {
-        this.state.infoTitle.setMap(null);
+        if(this.state.marker !== null) {
+            this.state.marker.setMap(null);
+        }
+        if(this.state.infoTitle !== null) {
+            this.state.infoTitle.setMap(null);
+        }
     }
 
     addMarker = (map, marker) => {
@@ -61,7 +68,10 @@ class Marker extends Component {
                 "<div class='titleCarousel'>" + this.state.eventTitles[0] + "</div>"
             );
         } else {
-            let i = 0;
+            infoTitle.setContent(
+                "<div class='titleCarousel'>" + this.state.eventTitles[0] + "</div>"
+            );
+            let i = 1;
             setInterval(() => {
                 if(i === this.state.eventTitles.length) {
                     i = 0;

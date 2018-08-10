@@ -125,7 +125,7 @@ class Map extends Component {
     }
 
     clearMarkers = () => {
-        this.setState({ markers: null });
+        this.setState({ markers: [] });
     }
 
     initMarkerCluster = () => {
