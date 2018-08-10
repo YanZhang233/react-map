@@ -11,12 +11,17 @@ class Marker extends Component {
         super(props);
         this.state = {
             marker: null,
-            eventTitles: []
+            eventTitles: [],
+            infoTitle: null
         };
     }
 
     componentDidMount() {
         this.addMarker(this.props.map, this.props.marker);
+    }
+
+    componentWillUnmount() {
+        this.state.infoTitle.setMap(null);
     }
 
     addMarker = (map, marker) => {
@@ -67,8 +72,11 @@ class Marker extends Component {
                 i++;
             }, 2000);
         }
+
+        this.setState({infoTitle: infoTitle}, () => {
+            this.state.infoTitle.open(map, marker);
+        });
         
-        infoTitle.open(map, marker);
     }
 
     render() {
