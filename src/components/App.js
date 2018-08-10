@@ -43,7 +43,7 @@ class App extends Component {
             if(res.data.status === 0) {
               this.setState({user: res.data.data})
             } else {
-                alert(res.data.msg);
+              console.log(res.data.msg);
             }
         })
     }

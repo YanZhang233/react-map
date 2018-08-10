@@ -10,7 +10,6 @@
 .events {
     width: 80%;
     margin: 2vh auto;
-    overflow: scroll;
 }
 .user-info {
     position: relative;
@@ -33,7 +32,9 @@
     right: 0;
 }
 .events-list {
-    padding: 25px 0px;
+    height: 38vh;
+    overflow: auto;
+    margin: 20px 0px;
 }
 
 @media (max-width: 800px) {

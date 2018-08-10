@@ -27,7 +27,7 @@
     width: 100%;
     height: 85%;
     padding: 0 10px;
-    overflow: scroll;
+    overflow: auto;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
     background: #f6f6f6;
