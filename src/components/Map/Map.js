@@ -107,8 +107,8 @@ class Map extends Component {
     }
 
     changeCenter = (center) => {
-        this.state.map.setCenter(center);
         this.getMarkers(center);
+        this.state.map.setCenter(center);
     }
 
     getMarkers = (center) => {

@@ -3,7 +3,7 @@
     z-index: 1;
     margin: 0;
     width: 35%;
-    height: 70vh;
+    height: 400px;
     background: white;
     animation: toggle 500ms ease-out;
 }
@@ -32,7 +32,7 @@
     right: 0;
 }
 .events-list {
-    height: 38vh;
+    height: 200px;
     overflow: auto;
     margin: 20px 0px;
 }
