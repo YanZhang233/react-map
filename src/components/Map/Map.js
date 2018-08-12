@@ -134,8 +134,8 @@ class Map extends Component {
           {
             textColor: 'white',
             url: markerClusterIcon,
-            height: 60,
-            width: 60
+            height: 50,
+            width: 50
           }
         ];
         const Options = {

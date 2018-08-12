@@ -74,7 +74,40 @@
 .description {
   padding: 0 20px;
 }
+
 .shift {
+  position: relative;
+  bottom: 10%;
+  height: 40px;
+}
+.left {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white; 
+  position: absolute;
+  left: 75px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 4px;
+  cursor: pointer;
+}
+.right {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white; 
+  position: absolute;
+  right: 75px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 4px;
+  cursor: pointer;
+}
+
+/*.shift {
   position: relative;
   bottom: 40%;
   height: 80px;
@@ -104,7 +137,7 @@
   font-size: 3rem;
   padding: 8px;
   cursor: pointer;
-}
+}*/
 .index {
   width: 100%;
   text-align: center;
