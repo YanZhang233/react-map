@@ -9,6 +9,10 @@ class Login extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            alert: null
+        };
+
         this.emailRef = React.createRef();
         this.passwordRef = React.createRef();
     }
@@ -35,7 +39,7 @@ class Login extends Component {
                 localStorage.setItem('Password', password);
                 this.props.history.push(`/`);
             } else {
-                alert(res.data.msg);
+                this.setState({alert: res.data.msg});
             }
         })
     }
@@ -51,6 +55,14 @@ class Login extends Component {
         >
 
           <div className="login-container container">
+
+            {this.state.alert !== null ?
+              <div className="alert alert-danger" role="alert">
+                {this.state.alert}
+              </div>
+              :""
+            }
+            
             <div className="formDiv">
               <h3 className="formHeader">LogIn</h3>
               <form onSubmit={this.handleSubmit}>

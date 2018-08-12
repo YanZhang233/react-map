@@ -136,6 +136,23 @@ class EditEvent extends Component {
         
     }
 
+    deleteEvent = (Event) => {
+        const cancel = window.confirm("Are you sure to delete your event?");
+        if(cancel) {
+            axios.delete(`/event/${this.props.event.id}`, null
+              )
+              .then(res => {
+                  console.log("delete", res.data);
+                  if(res.data.status === 0) {
+                    this.props.changeCenter(this.state.geoLocation);
+                    this.props.backToUser();
+                  } else {
+                    alert(res.data.msg);
+                  }
+              })
+        }
+    }
+
     render() {
         if(this.props.event !== null) {
             return (
@@ -173,7 +190,7 @@ class EditEvent extends Component {
                             <input name="description" type="text" className="form-control" id="description" ref={this.descriptionRef} />
                           </div>
                           <button className="btn btn-primary btn-block" type="submit">Save</button>
-                          <button className="btn btn-primary btn-block" onClick={this.props.deleteEvent}>Delete</button>
+                          <button className="btn btn-primary btn-block" onClick={this.deleteEvent}>Delete</button>
                         </form>
 
                     </div>

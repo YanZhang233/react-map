@@ -18,29 +18,6 @@ class Event extends Component {
         this.setState({event: event});
     }
 
-    deleteEvent = (event) => {
-        
-        const geoLocation = {
-            lat: event.latitude,
-            lng: event.longitude
-        };
-
-        const cancel = window.confirm("Are you sure to delete your event?");
-        if(cancel) {
-            axios.delete(`/event/${this.state.event.id}`, null
-              )
-              .then(res => {
-                  console.log("delete", res.data);
-                  if(res.data.status === 0) {
-                    this.props.changeCenter(geoLocation);
-                    this.backToUser();
-                  } else {
-                    alert(res.data.msg);
-                  }
-              })
-        }
-    }
-
     backToUser = () => {
         this.setState({event: null});
     }
@@ -64,7 +41,6 @@ class Event extends Component {
                     changeCenter={this.props.changeCenter}
                     event={this.state.event} 
                     toggleUser={this.props.toggleUser}
-                    deleteEvent={this.deleteEvent}
                     backToUser={this.backToUser}
                 />
             );
