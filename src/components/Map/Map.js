@@ -35,7 +35,8 @@ class Map extends Component {
                     lng: null
                 }
             },
-            markerCluster: null
+            markerCluster: null,
+            searchMarker: null
         };
 
         this.searchRef = React.createRef();
@@ -154,6 +155,9 @@ class Map extends Component {
         const searchInput = ReactDOM.findDOMNode(this.searchRef.current);
         const autocomplete = new google.maps.places.Autocomplete(searchInput);
         autocomplete.addListener('place_changed', () => {
+            if(this.state.searchMarker !== null) {
+                this.state.searchMarker.setMap(null);
+            }
             this.fillInSearchAddress(autocomplete);
             searchInput.value = null;
         });
@@ -165,7 +169,14 @@ class Map extends Component {
             lat: autoPlace.geometry.location.lat(),
             lng: autoPlace.geometry.location.lng()
         };
+
+        const search = new google.maps.Marker({position: center, map: this.state.map, animation: google.maps.Animation.BOUNCE});
+        this.setState({searchMarker: search});
         
+        // setTimeout(() => {
+        //     searchMarker.setMap(null);
+        // }, 5000);
+
         this.changeCenter(center);
         this.setDefaultEventPlace(center);
     }
