@@ -16,7 +16,7 @@ a {
     top: 11vh;
 }
 input[type=search] {
-    background: #89a4c7 url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
+    background: #fef4e8 url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
     border: solid 2px #ccc;
     border-radius: 30px;
     padding: 9px 10px 9px 32px;
@@ -26,7 +26,6 @@ input[type=search] {
 }
 input[type=search]:hover {
     background-color: #fff;
-    border: solid 2px #89a4c7;
     cursor: pointer;
 }
 input[type=search]:focus {
