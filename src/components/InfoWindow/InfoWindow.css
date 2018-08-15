@@ -169,5 +169,18 @@
     }
 }
 
+@media screen and (device-aspect-ratio: 40/71) {
+    .event-cta {
+        width: 300px;
+        height: 460px;
+    }
+    .event-info {
+        height: 83%;
+    }
+    .shift {
+        bottom: 12%;
+    }
+}
+
 
 

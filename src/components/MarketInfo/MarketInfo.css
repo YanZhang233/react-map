@@ -2,7 +2,7 @@
     position: fixed;
     width: 350px;
     height: 550px;
-    top: 3vh;
+    top: 10vh;
     left: 35vw;
     background: #f6f6f6;
     border-radius: 20px;
@@ -49,8 +49,15 @@
 @media (max-width: 800px) {
     .marketInfo-cta {
         z-index: 3;
-        top: 10vh;
         left: 3.5vw;
     }
 }
 
+@media screen and (device-aspect-ratio: 40/71) {
+    .marketInfo-cta {
+        z-index: 3;
+        left: 3vw;
+        width: 300px;
+        height: 500px;
+    }
+}
