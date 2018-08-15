@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Route, withRouter} from 'react-router-dom';
 import './DisplayEvent.css';
 import axios from "../../base.js";
 import Qs from 'qs';
@@ -21,6 +22,8 @@ class DisplayEvent extends Component {
             console.log("userEvents", res.data);
             if(res.data.status === 0) {
                 this.setState({userEvents: res.data.data});
+            } else if(res.data.status === 10) {
+                this.props.history.push(`/login`);
             } else {
                 alert(res.data.msg);
             }
@@ -75,4 +78,4 @@ class DisplayEvent extends Component {
   }
 }
 
-export default DisplayEvent;
+export default withRouter(DisplayEvent);
