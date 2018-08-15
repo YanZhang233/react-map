@@ -10,12 +10,16 @@ class DisplayEvent extends Component {
         super(props);
 
         this.state = {
-            userEvents: []
+            userEvents: [],
+            userAvatar: defaultAvatar
         };
     }
 
     componentDidMount() {
         // console.log("user", this.props.user);
+        if(this.props.user.avatar !== null) {
+            this.setState({userAvatar: this.props.user.avatar});
+        }
         axios.get(`/event/my`
         )
         .then(res => {
@@ -38,7 +42,7 @@ class DisplayEvent extends Component {
                 <div className="events">
                     <div className="user-info">
                         <div className="avatar">
-                            <img src={defaultAvatar} />
+                            <img src={this.state.userAvatar} />
                         </div>
                         {this.props.user.gender === 0 ?
                             <i className="fas fa-venus"></i>

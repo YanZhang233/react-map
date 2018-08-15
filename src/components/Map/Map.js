@@ -79,7 +79,7 @@ class Map extends Component {
                 lat: map.getCenter().lat(),
                 lng: map.getCenter().lng()
             }
-            if(Math.abs(center.lat - this.state.currentCenter.lat) > 0.04 || Math.abs(center.lng - this.state.currentCenter.lng) > 0.04) {
+            if(Math.abs(center.lat - this.state.currentCenter.lat) > 0.5 || Math.abs(center.lng - this.state.currentCenter.lng) > 0.5) {
                 this.setState({ currentCenter: center }, this.getMarkers(center));
                 this.setDefaultEventPlace(center);
             }
