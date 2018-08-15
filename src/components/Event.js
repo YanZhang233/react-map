@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import AddEvent from './AddEvent/AddEvent.js';
 import DisplayEvent from './DisplayEvent/DisplayEvent.js';
 import EditEvent from './EditEvent/EditEvent.js';
-import axios from "../base.js";
-import Qs from 'qs';
 
 class Event extends Component {
     constructor(props) {

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import {Route, withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import './DisplayEvent.css';
 import axios from "../../base.js";
-import Qs from 'qs';
 import defaultAvatar from '../../images/defaultAvatar.png';
 
 class DisplayEvent extends Component {

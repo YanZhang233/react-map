@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from "../../base.js";
-import Qs from 'qs';
 import './MarketInfo.css';
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 

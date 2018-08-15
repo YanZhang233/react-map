@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import {Route, withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import './Map.css';
 import Marker from '../Marker/Marker.js';
-import InfoWindow from '../InfoWindow/InfoWindow.js';
 import Event from '../Event.js';
-import sampleMarkers from '../sample-markers.js';
 import axios from "../../base.js";
 import Loading from "../Loading/Loading.js";
 import MarkerClusterer from '../../markerclusterer.js';
@@ -79,7 +77,7 @@ class Map extends Component {
                 lat: map.getCenter().lat(),
                 lng: map.getCenter().lng()
             }
-            if(Math.abs(center.lat - this.state.currentCenter.lat) > 0.5 || Math.abs(center.lng - this.state.currentCenter.lng) > 0.5) {
+            if(Math.abs(center.lat - this.state.currentCenter.lat) > 0.25 || Math.abs(center.lng - this.state.currentCenter.lng) > 0.25) {
                 this.setState({ currentCenter: center }, this.getMarkers(center));
                 this.setDefaultEventPlace(center);
             }

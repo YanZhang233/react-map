@@ -3,7 +3,6 @@ import './Register.css';
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import axios from "../../base.js";
 import Qs from 'qs';
-import ReactDOM from 'react-dom';
 
 class Register extends Component {
 

@@ -11,7 +11,6 @@ class Market extends Component {
 
         this.state = {
             markets: []
-
         };
     }
 
