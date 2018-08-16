@@ -17,9 +17,7 @@ class Marker extends Component {
     }
 
     componentDidMount() {
-        if(this.props.marker.eventNum > 0) {
-            this.addMarker(this.props.map, this.props.marker);
-        }
+        this.addMarker(this.props.map, this.props.marker);
     }
 
     componentWillUnmount() {
@@ -61,7 +59,9 @@ class Marker extends Component {
     }
 
     addInfoTitle = (map, marker) => {
-        let infoTitle = new google.maps.InfoWindow();
+        let infoTitle = new google.maps.InfoWindow({
+            disableAutoPan: true
+        });
 
         if(this.state.eventTitles === 1) {
             infoTitle.setContent(
