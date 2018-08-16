@@ -12,7 +12,9 @@ class Market extends Component {
 
         this.state = {
             markets: [],
-            marketInfo: null
+            DCMarketInfo: null,
+            VAMarketInfo: null,
+            MDMarketInfo: null
         };
     }
 
@@ -21,8 +23,14 @@ class Market extends Component {
     }
 
     componentWillUnmount() {
-        if(this.state.marketInfo !== null) {
-            this.state.marketInfo.setMap(null);
+        if(this.state.DCMarketInfo !== null) {
+            this.state.DCMarketInfo.setMap(null);
+        }
+        if(this.state.VAMarketInfo !== null) {
+            this.state.VAMarketInfo.setMap(null);
+        }
+        if(this.state.MDMarketInfo !== null) {
+            this.state.MDMarketInfo.setMap(null);
         }
     }
 
@@ -81,7 +89,7 @@ class Market extends Component {
             disableAutoPan: true
         });
 
-        this.setState({marketInfo: marketInfo}, () => {
+        this.setState({DCMarketInfo: marketInfo}, () => {
             marketInfo.open(map, marker);
         });
     }
@@ -96,7 +104,7 @@ class Market extends Component {
             disableAutoPan: true
         });
 
-        this.setState({marketInfo: marketInfo}, () => {
+        this.setState({VAMarketInfo: marketInfo}, () => {
             marketInfo.open(map, marker);
         });
     }
@@ -111,7 +119,7 @@ class Market extends Component {
             disableAutoPan: true
         });
 
-        this.setState({marketInfo: marketInfo}, () => {
+        this.setState({MDMarketInfo: marketInfo}, () => {
             marketInfo.open(map, marker);
         });
     }
