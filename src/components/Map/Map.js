@@ -63,7 +63,8 @@ class Map extends Component {
 
         const map = new google.maps.Map(node, {
             zoom: 16,
-            center: currentCenter
+            center: currentCenter,
+            clickableIcons: false
         });
 
         this.setState({map: map});
