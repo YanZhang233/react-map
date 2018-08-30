@@ -116,7 +116,7 @@ class Map extends Component {
         .then(res => {
             console.log("markers", res.data);
             if(res.data.status === 0) {
-                this.clearMarkers();
+                this.clearAllMarkers();
                 this.setState({markers: res.data.data}, this.initMarkerCluster);
             } else {
                 alert(res.data.msg);
@@ -124,8 +124,12 @@ class Map extends Component {
         })
     }
 
-    clearMarkers = () => {
-        this.setState({ markers: [] });
+    clearAllMarkers = () => {
+        this.setState({ markers: [] }, () => {
+            if(this.state.markerCluster !== null) {
+                this.state.markerCluster.clearMarkers();
+            }
+        });
     }
 
     initMarkerCluster = () => {
