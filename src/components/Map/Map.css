@@ -38,7 +38,7 @@ input[type=search]:focus {
 .map {
     margin: 0;
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 56px);
 }
 
 @media (max-width: 800px) {

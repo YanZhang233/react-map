@@ -345,7 +345,9 @@ class Map extends Component {
         const map = new google.maps.Map(node, {
             zoom: 16,
             center: currentCenter,
-            clickableIcons: false
+            clickableIcons: false,
+            disableDefaultUI: true,
+            zoomControl: true
         });
 
         map.mapTypes.set('day_map', dayMapType);
