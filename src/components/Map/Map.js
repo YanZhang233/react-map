@@ -34,10 +34,13 @@ class Map extends Component {
                 }
             },
             markerCluster: null,
-            searchMarker: null
+            searchMarker: null,
+            dayMapType: null,
+            nightMapType: null
         };
 
         this.searchRef = React.createRef();
+        this.mapStyleRef = React.createRef();
     }
 
     componentDidMount() {
@@ -341,6 +344,8 @@ class Map extends Component {
             ],
             {name: 'Night Map'});
 
+        this.setState({dayMapType: dayMapType});
+        this.setState({nightMapType: nightMapType});
 
         const map = new google.maps.Map(node, {
             zoom: 16,
@@ -352,8 +357,14 @@ class Map extends Component {
 
         map.mapTypes.set('day_map', dayMapType);
         map.mapTypes.set('night_map', nightMapType);
-        // map.setMapTypeId('day_map');
-        map.setMapTypeId('night_map');
+
+        const nightModeMap = this.mapStyleRef.current.checked;
+
+        if(nightModeMap === true) {
+            map.setMapTypeId('night_map');
+        } else {
+            map.setMapTypeId('day_map');
+        }
 
         this.setState({map: map});
 
@@ -504,6 +515,19 @@ class Map extends Component {
         this.setState({userEvent: userEvent});
     }
 
+    mapStyleChange = (event) => {
+        const nightModeMap = event.currentTarget.checked;
+
+        this.state.map.mapTypes.set('day_map', this.state.dayMapType);
+        this.state.map.mapTypes.set('night_map', this.state.nightMapType);
+
+        if(nightModeMap === true) {
+            this.state.map.setMapTypeId('night_map');
+        } else {
+            this.state.map.setMapTypeId('day_map');
+        }
+    }
+
     render() {
 
         return (
@@ -530,6 +554,13 @@ class Map extends Component {
                                 Logout
                             </a>
                        }
+                        <a className="navItem">
+                           <i className="fas fa-moon moon"></i>
+                           <label className="switch">
+                              <input ref={this.mapStyleRef} onChange={this.mapStyleChange} type="checkbox" />
+                              <span className="slider round"></span>
+                           </label>
+                        </a>
                     </nav>
                     <Event 
                         map={this.state.map}
