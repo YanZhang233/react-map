@@ -15,7 +15,7 @@ a {
 .switch {
   position: relative;
   display: inline-block;
-  width: 45px;
+  width: 43px;
   height: 20px;
   top: 2px;
   margin: 0;
@@ -56,9 +56,9 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(23px);
-  -ms-transform: translateX(23px);
-  transform: translateX(23px);
+  -webkit-transform: translateX(21px);
+  -ms-transform: translateX(21px);
+  transform: translateX(21px);
 }
 
 /* Rounded sliders */

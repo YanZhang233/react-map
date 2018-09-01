@@ -52,11 +52,42 @@ class Map extends Component {
                     lng: position.coords.longitude
                 }
             }, () => {
-                this.initMap();
+                this.initCurrentTime();
+                // this.initMap();
                 this.searchPlace();
             });
         });
   
+    }
+
+    initCurrentTime = () => {
+        const currentTime = new Date();
+        const currentHour = currentTime.getHours() + 4;
+        const currentMin = currentTime.getMinutes();
+
+        axios.get(`https://api.sunrise-sunset.org/json?lat=${this.state.currentCenter.lat}&lng=${this.state.currentCenter.lng}&date=today&formatted=0`
+        )
+        .then(res => {
+            console.log("sunrise-sunset", res.data);
+            if(res.data.status === "OK") {
+                const sunrise = res.data.results.sunrise;
+                const sunset = res.data.results.sunset;
+
+                //Night Mode
+                if(currentHour < sunrise.substring(11, 13) 
+                    || currentHour > sunset.substring(11, 13)
+                    || currentHour === sunrise.substring(11, 13) && currentMin < sunrise.substring(14, 16)
+                    || currentHour === sunset.substring(11, 13) && currentMin > sunset.substring(14, 16)) {
+
+                    this.mapStyleRef.current.checked = true;
+                } 
+
+                this.initMap();
+
+            } else {
+                alert(res.data.msg);
+            }
+        })
     }
 
     initMap = () => {
@@ -66,171 +97,113 @@ class Map extends Component {
 
         const dayMapType = new google.maps.StyledMapType(
             [
-               {
-                    "featureType": "all",
-                    "elementType": "geometry.fill",
-                    "stylers": [
-                        {
-                            "weight": "2.00"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "all",
-                    "elementType": "geometry.stroke",
-                    "stylers": [
-                        {
-                            "color": "#9c9c9c"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "all",
-                    "elementType": "labels.text",
-                    "stylers": [
-                        {
-                            "visibility": "on"
-                        }
-                    ]
-                },
                 {
                     "featureType": "landscape",
-                    "elementType": "all",
                     "stylers": [
                         {
-                            "color": "#f2f2f2"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "landscape",
-                    "elementType": "geometry.fill",
-                    "stylers": [
-                        {
-                            "color": "#ffffff"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "landscape.man_made",
-                    "elementType": "geometry.fill",
-                    "stylers": [
-                        {
-                            "color": "#ffffff"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "saturation": -100
+                            "hue": "#FFBB00"
                         },
                         {
-                            "lightness": 45
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road",
-                    "elementType": "geometry.fill",
-                    "stylers": [
+                            "saturation": 43.400000000000006
+                        },
                         {
-                            "color": "#eeeeee"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
+                            "lightness": 37.599999999999994
+                        },
                         {
-                            "color": "#7b7b7b"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road",
-                    "elementType": "labels.text.stroke",
-                    "stylers": [
-                        {
-                            "color": "#ffffff"
+                            "gamma": 1
                         }
                     ]
                 },
                 {
                     "featureType": "road.highway",
-                    "elementType": "all",
                     "stylers": [
                         {
-                            "visibility": "simplified"
+                            "hue": "#FFC200"
+                        },
+                        {
+                            "saturation": -61.8
+                        },
+                        {
+                            "lightness": 45.599999999999994
+                        },
+                        {
+                            "gamma": 1
                         }
                     ]
                 },
                 {
                     "featureType": "road.arterial",
-                    "elementType": "labels.icon",
                     "stylers": [
                         {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "transit",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "water",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "color": "#46bcec"
+                            "hue": "#FF0300"
                         },
                         {
-                            "visibility": "on"
+                            "saturation": -100
+                        },
+                        {
+                            "lightness": 51.19999999999999
+                        },
+                        {
+                            "gamma": 1
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "labels.icon",
+                    "stylers": [
+                        {"visibility": "off"}
+                    ]
+                },
+                {
+                    "featureType": "road.local",
+                    "stylers": [
+                        {
+                            "hue": "#FF0300"
+                        },
+                        {
+                            "saturation": -100
+                        },
+                        {
+                            "lightness": 52
+                        },
+                        {
+                            "gamma": 1
                         }
                     ]
                 },
                 {
                     "featureType": "water",
-                    "elementType": "geometry.fill",
                     "stylers": [
                         {
-                            "color": "#c8d7d4"
+                            "hue": "#0078FF"
+                        },
+                        {
+                            "saturation": -13.200000000000003
+                        },
+                        {
+                            "lightness": 2.4000000000000057
+                        },
+                        {
+                            "gamma": 1
                         }
                     ]
                 },
                 {
-                    "featureType": "water",
-                    "elementType": "labels.text.fill",
+                    "featureType": "poi",
+                    "elementType": "labels",
                     "stylers": [
                         {
-                            "color": "#070707"
+                            "visibility": "off"
                         }
                     ]
                 },
                 {
-                    "featureType": "water",
-                    "elementType": "labels.text.stroke",
+                    "featureType": "poi.park",
+                    "elementType": "geometry",
                     "stylers": [
                         {
-                            "color": "#ffffff"
+                            "color": "#bde6ab"
                         }
                     ]
                 }
@@ -515,7 +488,7 @@ class Map extends Component {
         this.setState({userEvent: userEvent});
     }
 
-    mapStyleChange = (event) => {
+    handleMapStyleChange = (event) => {
         const nightModeMap = event.currentTarget.checked;
 
         this.state.map.mapTypes.set('day_map', this.state.dayMapType);
@@ -557,7 +530,7 @@ class Map extends Component {
                         <a className="navItem">
                            <i className="fas fa-moon moon"></i>
                            <label className="switch">
-                              <input ref={this.mapStyleRef} onChange={this.mapStyleChange} type="checkbox" />
+                              <input ref={this.mapStyleRef} onChange={this.handleMapStyleChange} type="checkbox" />
                               <span className="slider round"></span>
                            </label>
                         </a>
