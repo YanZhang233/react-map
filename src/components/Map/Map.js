@@ -65,7 +65,8 @@ class Map extends Component {
         const currentHour = currentTime.getHours() + 4;
         const currentMin = currentTime.getMinutes();
 
-        axios.get(`https://api.sunrise-sunset.org/json?lat=${this.state.currentCenter.lat}&lng=${this.state.currentCenter.lng}&date=today&formatted=0`
+        axios.get(`https://api.sunrise-sunset.org/json?lat=${this.state.currentCenter.lat}&lng=${this.state.currentCenter.lng}&date=today&formatted=0`,
+            {withCredentials: false}
         )
         .then(res => {
             console.log("sunrise-sunset", res.data);
