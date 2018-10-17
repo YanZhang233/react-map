@@ -87,9 +87,8 @@ class EditEvent extends Component {
         });
     }
 
-    handleSubmit = event => {
-        event.preventDefault();
-
+    updateEvent = (event) => {
+        
         if(this.state.newMarker !== null) {
             this.state.newMarker.setMap(null);
         }
@@ -159,7 +158,7 @@ class EditEvent extends Component {
                 <div className="container event">
                     <i className="close fas fa-chevron-left" onClick={this.props.backToUser}></i>
                     <div className="event-form">
-                        <form onSubmit={this.handleSubmit}>
+                        
                           <div className="form-group">
                             <label htmlFor="title">Event Title</label>
                             <input 
@@ -189,10 +188,9 @@ class EditEvent extends Component {
                             <label htmlFor="description">Description</label>
                             <input name="description" type="text" className="form-control" id="description" ref={this.descriptionRef} />
                           </div>
-                          <button className="btn btn-primary btn-block" type="submit">Save</button>
-                          <button className="btn btn-primary btn-block" onClick={this.deleteEvent}>Delete</button>
-                        </form>
-
+                          <button className="btn btn-primary btn-block" onClick={() => this.updateEvent()}>Save</button>
+                          <button className="btn btn-primary btn-block" onClick={() => this.deleteEvent()}>Delete</button>
+                        
                     </div>
                 </div>
             );
